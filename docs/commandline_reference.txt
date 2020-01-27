@@ -1,0 +1,28 @@
+To create conda environment:
+$ conda create -n eods-s20 --file docs/requirements.txt
+
+
+To activate conda environment:
+$ conda activate eods-s20
+
+
+To deactivate conda environment:
+$ conda deactivate
+
+
+To start jupyter:
+$ jupyter notebook
+
+
+To add conda virtual environment to jupyter kernel list:
+$ python -m ipykernel install --user --name eods-s20 
+
+
+To install modules in a virtual environment, try, in order
+$ conda install -n eods-s20 <package>
+or 
+$ conda install -n eods-s20 -c conda-forge <package>
+or
+$ conda activate eods-s20
+$ pip install <package>
+

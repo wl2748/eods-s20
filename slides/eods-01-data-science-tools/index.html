@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Science Tools</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Garamond);
+      @import url(https://fonts.googleapis.com/css?family=Muli:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+Elements of Data Science - F2019
+
+# Introduction to Data Science Tools
+
+01/27/2020
+
+---
+# TODOs
+<br/>
+
+--
+count: false
+- Read Chapters 1,2 of DSFS
+- Scan Chapter 1 of PDSH
+--
+count: false
+- Answer and submit Quiz1
+
+---
+# Tools we'll be using
+<br/>
+
+--
+count: false
+ - **Python** (3.7): Programming language
+
+
+--
+count: false
+- **Anaconda** (4.8): Package maintenance and environments 
+
+
+--
+count: false
+ - **Jupyter** : IDE
+
+
+--
+count: false
+ - **Git** : Source control and versioning
+
+
+---
+# Aside: The Terminal and The Shell
+<br/>
+
+.center[
+ ![:scale 40%](images/terminal.png)]
+
+--
+count: false
+ - If not familiar, get aquainted
+--
+count: false
+ - Common set of commands (Ex. cd, ls, cat, mv)
+
+
+--
+count: false
+ - OSX and Linux, comes by default
+ - Windows coming soon, for now use Git Bash
+---
+# Aside: Common Commands
+
+--
+count: false
+ - `cd` : change directory
+
+--
+count: false
+ - `pwd` : where am i
+
+--
+count: false
+ - `ls` : list directory contents
+
+--
+count: false
+ - `head` : show the beginning of a file
+
+--
+count: false
+ - `tail` : show the end of a file
+
+--
+count: false
+ - `cat` : show an entire file
+
+--
+count: false
+ - `less` : open a file in a pager
+
+--
+count: false
+ - `rm` : remove file
+
+--
+count: false
+ - ...
+
+
+--
+count: false
+- .smaller[https://tutorial.djangogirls.org/en/intro_to_command_line/]
+---
+# Data Science Life Skills
+<br/>
+
+
+--
+count: false
+ - Data munging
+
+
+--
+count: false
+ - Visualization
+
+
+--
+count: false
+ - Statistical analysis
+
+
+--
+count: false
+ - Machine learning
+
+
+--
+count: false
+ - Reporting
+
+
+--
+count: false
+ - Prototyping 
+
+
+--
+count: false
+ - Productionizing...
+
+
+---
+# Why Python?
+<br/>
+
+--
+count: false
+ - Robust and active DS stack
+
+
+--
+count: false
+ - Cross-platform
+
+
+--
+count: false
+ - Relatively low learning curve
+
+
+--
+count: false
+ - Fast to answers and prototypes
+
+
+ <br/>
+--
+count: false
+ - Many other good languages and frameworks (R, Scala, etc.)
+
+
+---
+# Why Python?
+But isn't python slow?
+
+--
+count: false
+- Issues: 
+    - GIL (Global Interpereter Lock)
+    - dynamic typing
+
+--
+count: false
+- Solutions:
+    - numpy
+    - multiprocessing
+    - pypy instead of CPython
+    - distributed processeing with pyspark?
+
+
+--
+count: false
+- Good article discussing why things are: https://bit.ly/2NufScx
+
+
+---
+# The Python DS Stack
+
+--
+count: false
+ - Data munging : pandas, numpy
+
+
+--
+count: false
+ - Visualization : matplotlib, seaborn, plotly
+
+
+--
+count: false
+ - Statistical analysis : scipy, statsmodels, patsy
+
+
+--
+count: false
+ - Machine learning : scikit-learn, tensorflow
+
+
+--
+count: false
+ - Reporting : ipython+jupyter, dash
+
+
+--
+count: false
+ - Prototyping : flask
+
+
+--
+count: false
+ - Productionizing?
+
+
+
+---
+# Python 2 vs 3
+<br/>
+
+
+--
+count: false
+ - We'll be using Python 3.7
+
+--
+count: false
+ - Many projects dropping support for 2, see pip, scikit-learn
+
+<br/>
+--
+count: false
+ - Need 2 for another class? Virtual environments!
+
+---
+# How To Get Python
+<br/>
+
+
+--
+count: false
+ - You might already have it
+
+
+--
+count: false
+ - But your OS needs it!
+
+
+--
+count: false
+ - Our solution: Anaconda
+
+ &nbsp;&nbsp;&nbsp;&nbsp;![:scale 25%](https://www.anaconda.com/wp-content/uploads/2018/06/cropped-Anaconda_horizontal_RGB-1-600x102.png)
+
+
+---
+# Why Anaconda?
+.center[
+![](https://imgs.xkcd.com/comics/python_environment.png)]
+.smallest[https://imgs.xkcd.com/comics/python_environment.png]
+
+---
+# Why Anaconda?
+<br/>
+
+
+--
+count: false
+ - includes most of what we need by default
+
+
+--
+count: false
+ - package curation
+
+
+--
+count: false
+ - conda virtual environments
+
+
+--
+count: false
+ - cross-platform
+
+---
+# Installing Anaconda
+
+ - Download via https://www.anaconda.com/distribution/
+
+--
+count: false
+ - Select OS and Grab Python 3.7 version
+
+--
+count: false
+- Install somewhere easy to navigate to<br>
+ Ex: `/home/bgibson/anaconda3` or `C:\\Users\brygib\anaconda3`
+
+
+--
+count: false
+ - Recommend letting installer run `conda init` to set up your shell
+
+<br/>
+--
+count: false
+ - Note: `base` environment activated by default
+ - Turn off via `conda config --set auto_activate_base false`
+
+
+---
+# Running Python
+<br/>
+
+Via REPL (Read–Eval–Print Loop)
+
+```bash
+*(base) bgibson@civet:~$ python
+Python 3.7.3 (default, Mar 27 2019, 22:11:17) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print('hello')
+hello
+>>> quit()
+```
+
+--
+count:false
+
+ - `Ctrl-D` or `quit()` to exit
+
+???
+
+
+---
+# Running Python
+<br/>
+
+Via command line
+
+```bash
+*(base) bgibson@civet:~$ python -c "print('hello')"
+hello
+```
+
+<br/>
+--
+count:false
+Via script
+
+```bash
+(base) bgibson@civet:~$ echo "print('hello')" > /tmp/say_hello.py
+*(base) bgibson@civet:~$ python /tmp/say_hello.py
+hello
+```
+
+---
+# Ipython: Interactive Python
+<br/>
+
+
+--
+count:false
+
+- history
+
+--
+count:false
+
+- tab completion
+
+--
+count:false
+
+- "magic" commands
+
+--
+count:false
+
+- help
+
+--
+count:false
+
+- (see PDSH Ch 1 for more info)
+
+---
+# Ipython : REPL and Help
+
+```bash
+(base) bgibson@civet:~$ ipython
+Python 3.7.3 (default, Mar 27 2019, 22:11:17)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.6.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: print('hello')
+hello
+
+In [2]: len?
+Signature: len(obj, /)
+Docstring: Return the number of items in a container.
+Type:      builtin_function_or_method
+
+In [3]:
+```
+
+---
+# Ipython Magic Commands
+
+--
+count:false
+
+- preceded by % for line, %% for cell
+
+--
+count:false
+
+```python
+In [1]: %run say_hello.py
+hello
+```
+
+--
+count:false
+
+```python
+In [2]: %timeit sorted([5,1,2,5])
+162 ns ± 1.87 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+```
+--
+count:false
+
+```python
+In [22]: %%timeit x = []
+    ...: for i in range(20):
+    ...:     x.append(i**2)
+    ...:
+3.39 µs ± 65 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+```
+
+---
+# Help with Magic Commands
+<br/>
+
+--
+count:false
+- get information about the %timeit magic function
+ - `%timeit?`
+
+--
+count:false
+- get info on all magic functions
+ - `%magic`   
+
+--
+count:false
+- get list of magic functions
+ - `%lsmagic` 
+
+
+---
+# Ipython Notebooks with Jupyter
+
+--
+count:false
+- application that combines code, markup and visualizations
+
+--
+count:false
+- interact via web browser
+
+--
+count:false
+- notebooks are easily sharable
+
+--
+count:false
+- Jupyter can run other kernels as well: R, Julia, C#, etc.
+
+
+--
+count:false
+```bash
+(base) bgibson@civet:~$ cd ~/proj
+(base) bgibson@civet:~/proj$ jupyter notebook
+```
+
+--
+count:false
+- launches in your default browser
+
+--
+count:false
+- `Ctrl-C` to kill server
+
+--
+count:false
+- DEMO
+
+---
+# Other IDEs
+
+- jupyterlab
+- spyder
+- pycharm
+- visual studio code
+- ...
+
+<br/>
+- arguments against notebooks: [slides by Joel Grus](https://conferences.oreilly.com/jupyter/jup-ny/public/schedule/detail/68282)
+
+
+---
+# Virtual Environments
+<br/>
+
+--
+count:false
+- encapsulate python executable and packages
+
+--
+count:false
+- allow for easy experimentation
+
+--
+count:false
+- workaround versioning issues
+
+--
+count:false
+- two major implementations: virtualenv and conda
+
+
+---
+### Virtual Environments with Conda
+.smaller[
+```bash
+*(base) bgibson@civet:~$ conda create -n py2 python=2.7
+...
+```]
+--
+count:false
+.smaller[
+```bash
+*(base) bgibson@civet:~$ conda activate py2
+
+(py2) bgibson@civet:~$ which python
+/home/bgibson/anaconda3/envs/py2/bin/python
+
+(py2) bgibson@civet:~$ python --version
+Python 2.7.16 :: Anaconda, Inc.
+```]
+--
+count:false
+.smaller[
+```bash
+*(py2) bgibson@civet:~$ conda deactivate
+
+(base) bgibson@civet:~$ which python
+/home/bgibson/anaconda3/bin/python
+
+(base) bgibson@civet:~$ python --version
+Python 3.7.3
+```]
+
+---
+# Managing Conda Enviroments
+</br>
+
+--
+count:false
+- `conda create -n [env_name]`
+--
+count:false
+- `conda create -n [env_name] [package] [package]=[version]`
+--
+count:false
+- `conda create -n [env_name] --file [requirementsfile]`
+
+
+--
+count:false
+- `conda activate [name]`
+--
+count:false
+- `conda deactivate`
+
+
+--
+count:false
+- `conda env list`
+
+
+--
+count:false
+- For more information see:<br>
+ .smallest[https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html]
+
+
+---
+## Installing New Packages
+
+--
+count:false
+- again, don't want to mess with system packages (separate method)
+
+
+--
+count:false
+- first, try conda:<br/>
+`conda install -n [env_name] [package]`
+
+
+--
+count:false
+- next, try another channel : conda-forge<br/>
+`conda install -n [env_name] -c conda-forge [package]`
+
+
+--
+count:false
+- lastly, try pip:<br/>
+`conda activate [env_name]`<br>
+`pip install [package]`
+
+
+--
+count:false
+- when you can, double check the path to your env
+
+
+---
+# Conda Envs and Jupyter
+
+--
+count:false
+
+- jupyter can run many different kernels
+
+--
+count:false
+
+- conda envs not automatically added as available kernels
+
+--
+count:false
+
+Example:
+```bash
+(base) $ conda activate py2
+(py2) $ conda install ipykernel
+(py2) $ python -m ipykernel install --user --name py2
+```
+--
+count:false
+- to list kernels: `jupyter kernelspec list`
+--
+count:false
+- to remove kernel: `jupyter kernelspec uninstall [name]`
+
+
+--
+count:false
+- note: fix for this may happen soon?
+
+---
+# Jupyter Demo
+
+--
+count:false
+- Important: `h` for help
+
+--
+count:false
+- Markdown syntax help: https://daringfireball.net/projects/markdown/syntax
+
+---
+# Example Notebooks
+
+- https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
+
+
+---
+# Git and Github
+
+.center[
+![:](http://imgs.xkcd.com/comics/git.png)]
+http://imgs.xkcd.com/comics/git.png
+
+
+---
+# Git
+<br>
+
+
+--
+count:false
+- distributed version control
+
+--
+count:false
+- for code, documentation, data?
+
+
+---
+# Github
+<br/>
+
+--
+count:false
+- backup
+
+
+--
+count:false
+- sharing
+
+
+--
+count:false
+- used for both large and small projects
+
+
+--
+count:false
+- Ex: https://github.com/scikit-learn/scikit-learn
+
+
+---
+# Getting course material
+<br/>
+
+
+--
+count:false
+- Can view online at: https://github.com/bryanrgibson/eods-s20
+
+
+--
+count:false
+```bash
+$ cd [your projects folder]
+$ git clone https://github.com/bryanrgibson/eods-s20
+```
+
+<br/>
+--
+count:false
+- We'll discuss more in the future
+
+---
+class: middle
+
+# Questions re Tools?
+
+
+---
+# Python (Review?)
+
+--
+count:false
+- Whitespace Formatting
+
+--
+count:false
+- Functions
+
+--
+count:false
+- Exceptions
+
+--
+count:false
+- Assertions
+
+--
+count:false
+- Basic Data Types
+
+--
+count:false
+- Comparisons and Logical Operators
+
+--
+count:false
+- Control Flow
+
+--
+count:false
+- List/Dict Comprehensions
+
+--
+count:false
+- Type Annotations
+
+--
+count:false
+- Importing Modules
+
+
+
+---
+# Whitespace Formatting
+
+- Instead of braces or brackets to delimit blocks, whitespace
+
+.smaller[
+```python
+# The pound sign marks the start of a comment. Python itself
+# ignores the comments, but they're helpful for anyone reading the code.
+for i in [1, 2, 3, 4, 5]:
+    print(i)                    # first line in "for i" block
+    for j in [1, 2, 3, 4, 5]:
+        print(j)                # first line in "for j" block
+        print(i + j)            # last line in "for j" block
+    print(i)                    # last line in "for i" block
+print("done looping")
+```]
+
+
+<br/>
+--
+count:false
+- Style Guide : PEP 8 (https://www.python.org/dev/peps/pep-0008/)
+
+
+---
+# Functions
+
+.smaller[
+```python
+def add_two(x):
+    """Adds 2 to the number passed in."""
+    return x+2
+```]
+
+--
+count:false
+```bash
+add_two(2)
+4
+```
+
+---
+# Functions With Defaults
+--
+count:false
+```python
+def add_amount(x,amount=2):
+    """Adds an amount to number, default to add is 2."""
+    return x+amount
+```
+
+--
+count:false
+```bash
+add_amount(2,4)
+6
+```
+
+---
+# Exceptions
+--
+count:false
+```python
+add_amount("two",4)
+```
+
+--
+count:false
+```python
+TypeError: can only concatenate str (not "int") to str
+```
+
+---
+# Try-Except
+
+```python
+try:
+    add_amount('two',4)
+except TypeError as e:
+    print("ERROR!!!",e)
+```
+
+--
+count:false
+```bash
+ERROR!!! can only concatenate str (not "int") to str
+```
+
+???
+
+.smaller[
+```python
+def print_hello(num_times=1):
+    """Prints the string 'hello' a requested number of times."""
+    print(' '.join(["hello"]*num_times))
+```]
+
+---
+# Assert
+
+- use `assert` to test anything we know should be true
+- simple unit test
+- only returns something when assertion is false
+
+--
+count:false
+
+```python
+assert add_amount(2,4) == 6
+```
+
+--
+count:false
+
+```python
+assert 1 == 0, "this should fail"
+```
+
+--
+count:false
+
+```bash
+this should fail
+```
+
+
+---
+# Basic Python Data Types
+
+--
+count:false
+- **int** : `42`
+
+
+--
+count:false
+- **float** : `4.2` or `4e2`
+
+
+
+--
+count:false
+- **boolean (bool)** : `True` or `False`
+
+
+--
+count:false
+- **string (str)** : `'num 42'` or `"num 42"`
+
+
+--
+count:false
+- **none**: `None`
+
+<br/>
+--
+count:false
+- also `long`, `complex`, `bytes`, etc.
+
+---
+# Python Data Types Continued
+
+--
+count:false
+- **list** : `x = [42,'e',2.0]`&nbsp;&nbsp;
+    - `x[0] == 42 # indexing`
+    - `x[2] = 4 # assignment`
+
+
+--
+count:false
+- **dict** : `x = {'b':2,'a':1,'c':4}`
+    - `x['b'] == 2 # indexing`
+    - `x['d'] = 3 # assignment`
+    - `x.keys()`
+    - `x.values()`
+    - `x.items()`
+
+---
+# Python Data Types Continued
+--
+count:false
+- **tuple** : `x = (2,'e')`
+    - `x[0] == 2 # indexing`
+    - `x[0] = 3 # assignment? Nope, error, immutable`
+
+
+--
+count:false
+- **set** : `x = {2,'e','e'}`
+    - `x.add(1)`
+    - `x.remove('e')`
+
+
+---
+# Python Comparisons and Logical Operators
+<br/>
+
+
+--
+count:false
+- `==, !=, <, >, <=, >=`
+
+
+--
+count:false
+- `is, and, or, not`
+
+
+--
+count:false
+- `&, | , ~ # bitwise operators, we'll see these in pandas`
+
+
+---
+# Conditionals
+
+--
+count:false
+- if then elif then
+
+```python
+    if x &gt; 0:
+        print('x &gt; 0')
+    elif x &lt; 0:
+        print('x &lt; 0')
+    else:
+        print('x == 0')
+```
+
+--
+count:false
+
+- single line if then else
+
+```python
+"x &lt; 0" if (x &lt; 0) else "x &gt;= 0"
+```
+
+---
+# Python Loops
+
+--
+count:false
+- for loop
+
+```python
+for x in range(5):
+    print(x)
+```
+
+--
+count:false
+- while loop
+
+```python
+x = 0
+while x &lt; 5:
+    print(x)
+    x += 1
+```
+
+---
+# List/Dict Comprehensions
+<br>
+
+--
+count:false
+- List Comprehension
+
+```python
+zero_to_four = [x for x in range(5)]
+```
+
+--
+count:false
+```python
+even_idx = [i for i,x in enumerate(zero_to_four) if x%2 == 0]
+```
+
+--
+count:false
+- Dict Comprehension
+
+```python
+pairs = ((1,'e'),(3,'f'))
+X = {key:val for key,val in pairs}
+```
+
+---
+# Type Annotations
+
+- python is **dynamically typed**
+
+```python
+x = 2
+x = 'two'
+```
+
+--
+count:false
+
+- if we want to add information, use **type annotations**
+- not strictly **statically typed**, but can be helpful 
+- for documentation, code completion, ...
+
+```python
+def add_amount(x: int, amount: int) -&gt; int:
+    return x+amount
+```
+
+---
+# Importing Modules
+
+- Want to calculate square root?
+
+```python
+import math
+math.sqrt(2)
+```
+
+Want to import a submodule or function?
+
+```python
+from math import sqrt
+sqrt(2)
+```
+
+---
+# Importing Modules Cont.
+
+Want to import a module using an alias?
+
+```python 
+import math as m
+```
+
+--
+count:false
+
+Don't do!!!
+```python
+from math import *
+```
+
+
+---
+class:middle
+
+# Questions?
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script>
+    // Config Remark
+    remark.macros['scale'] = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+    };
+    config_remark = {
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true,
+        ratio: "16:9"
+    };
+      var slideshow = remark.create(config_remark);
+
+    // Configure MathJax
+    MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] /* removed 'code' entry*/
+    }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
+  </body>
+</html>
