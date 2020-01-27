@@ -34,7 +34,27 @@ count: false
 - Answer and submit Quiz1
 
 ---
-# Tools we'll be using
+# Data Science Tools
+
+--
+count:false
+- Data
+
+--
+count:false
+- Domain Expertise
+
+--
+count:false
+- Statistics
+
+--
+count:false
+- Computation
+
+
+---
+# Software Tools we'll be using
 <br/>
 
 --
@@ -1062,12 +1082,12 @@ count:false
 - if then elif then
 
 ```python
-    if x &gt; 0:
-        print('x &gt; 0')
-    elif x &lt; 0:
-        print('x &lt; 0')
-    else:
-        print('x == 0')
+if x &gt; 0:
+    print('x &gt; 0')
+elif x &lt; 0:
+    print('x &lt; 0')
+else:
+    print('x == 0')
 ```
 
 --
@@ -1185,6 +1205,35 @@ Don't do!!!
 from math import *
 ```
 
+---
+# `collections` Library
+
+--
+count:false
+- Counter : useful for counting hashable objects
+
+```python
+>>> cnt = Counter()
+>>> for word in ['red', 'blue', 'red', 'green', 'blue', 'blue']:
+...     cnt[word] += 1
+>>> cnt
+Counter({'blue': 3, 'red': 2, 'green': 1})
+```
+
+
+--
+count:false
+- OrderedDict : remembers order added
+
+
+--
+count:false
+- defaultdict : supplies missing values
+
+
+--
+count:false
+- others : https://docs.python.org/3.7/library/collections.html
 
 ---
 class:middle
