@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Garamond);
+      @import url(https://fonts.googleapis.com/css?family=Muli:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+Elements of Data Science - S2020
+
+# Introduction
+
+
+Bryan R. Gibson, PhD
+
+---
+# Who is this course for?
+<br/>
+People fairly new to:
+--
+count: false
+- Python
+
+--
+count: false
+- Data Science Python libraries 
+
+--
+count: false
+- Experimental Statistics
+
+--
+count: false
+- Visualization
+
+--
+count: false
+- Machine Learning
+
+---
+
+# What will we be covering?
+
+--
+count: false
+ - DS tools
+
+--
+count: false
+ - Data manipulation, cleaning and transformation
+
+--
+count: false
+ - Intro to data exploration and visualization
+
+--
+count: false
+ - Intro to analysis and hypothesis testing
+
+--
+count: false
+ - Intro to predictive modeling
+
+--
+count: false
+ - Intro to clustering and topic modeling
+
+--
+count: false
+ - Intro to dimensionality reduction and image recognition
+
+--
+count: false
+ - Intro to time series data
+
+--
+count: false
+ - Intro to databases
+
+--
+count: false
+ - Intro to recommendation engines
+
+
+---
+
+# Logistics
+</br>
+
+## Email: brg2130@columbia.edu
+</br>
+
+## TAs: See the course website
+</br>
+
+## Office Hours
+- Bryan: 4:30-6pm Mondays, where TBD
+- TAs: See the course website
+
+???
+
+---
+# Course Materials
+<br/>
+
+--
+counter:false
+ - Website via Canvas:<br/>https://courseworks2.columbia.edu/courses/99680
+
+
+--
+counter:false
+ - Slides and quizzes via git:<br/>https://github.com/bryanrgibson/eods-s20
+
+
+--
+counter:false
+ - Assignments via git:<br/> More instructions to come
+
+---
+# Slides
+<br/>
+
+--
+counter:false
+- Written in Remark and Jupyter Notebook
+
+--
+counter:false
+- To view Remark slides, open index.html in a browser
+
+
+---
+# Textbook
+
+- **Data Science from Scratch, 2nd Ed.** by Joel Grus
+ - [Amazon](https://www.amazon.com/Data-Science-Scratch-Principles-Python/dp/1492041130/ref=dp_ob_title_bk)
+ - [Code and Examples](https://github.com/joelgrus/data-science-from-scratch)
+ - [Errata](https://www.oreilly.com/catalog/errata.csp?isbn=0636920179337)
+
+- **Python Data Science Handbook** by Jake VanderPlas
+ - [Free Online](https://jakevdp.github.io/PythonDataScienceHandbook/)
+
+
+ .center[
+ ![:scale 20%](../../assets/dsfs_2ndedition.jpg)
+ ![:scale 20%](../../assets/PDSH-cover.png)]
+
+---
+# Additional Resources
+
+### See the course website
+
+???
+
+- **Practical Statistics for Data Scientists** by Bruce & Bruce
+- **Feature Engineering for Machine Learning** by Zheng & Casari
+---
+# Homeworks and Exams
+<br/>
+
+--
+counter:false
+- Weekly Quiz, submit online, graded on completion 
+ - 10% of grade, equally weighted
+ - no late days
+
+--
+counter:false
+- 4 Homework Assignments, submit online, equally weighted
+ - 40%, equally weighted
+ - 2 free late days to be used when you choose
+ - 25% off for each late day
+
+--
+counter:false
+- Midterm Exam in class
+
+
+--
+counter:false
+- Final Exam in class
+
+---
+# Plagiarism and Code copying
+<br/>
+
+- Homeworks are checked for plagiarism
+
+
+- Copied code will result in 0 points for all involved
+
+
+- Copying from my slides or online sources (Stack overflow, tutorials, etc. ) is fine.
+
+???
+
+---
+class: middle
+
+# Questions re Logistics?
+
+
+---
+# What is DataScience?
+</br>
+
+--
+count:false
+
+Data science, also known as data-driven science, is **an interdisciplinary field** about scientific methods, processes, and systems **to extract knowledge or insights from data** in various forms, either structured or unstructured, similar to data mining.
+
+
+<br/>
+https://en.wikipedia.org/wiki/Data_science
+
+---
+# What is DataScience?
+.center[
+![](../../assets/Data_Science_VD.png)]
+http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram
+
+
+---
+# Data Science &ne; Magic
+<br/>
+
+--
+counter:false
+- "Can we find something in this data?" **Yes**
+
+
+--
+counter:false
+- "Will it solve our business problem?" **Maybe**
+
+
+--
+counter:false
+- "Will it be easy?" **Probably not**
+
+
+---
+# What does a Data Science workflow look like?
+<br/>
+--
+counter:false
+- Business Need →
+--
+counter:false
+- DS Question →
+--
+counter:false
+- ETL ↔
+--
+counter:false
+- Experimentation →
+--
+counter:false
+- Tool Creation →
+--
+counter:false
+- Reporting
+
+---
+# Important Before You Start!
+<br/>
+--
+counter:false
+1. What's the question?
+<br/><br/>
+--
+counter:false
+2. What does success look like?
+<br/><br/>
+--
+counter:false
+3. How are we going to measure it?
+<br/><br/><br/>
+--
+counter:false
+**Can't always get answers to these, but good to ask.**
+
+
+
+---
+# Examples
+<br/>
+
+--
+count:false
+- [Machine Bias in Criminal Sentencing, Propublica](https://github.com/propublica/compas-analysis)
+
+
+--
+count:false
+- [Analysis of OkCupid Data](https://nbviewer.jupyter.org/github/lalelale/profiles_analysis/blob/master/profiles.ipynb)
+
+
+--
+count:false
+- [David Bowie Job Mentions](https://twitter.com/AndyRileyish/status/1170765576878329857?s=20)
+
+
+--
+count:false
+- [NYC Crash Mapper](http://crashmapper.org/#/?cfat=true&cinj=true&endDate=2019-07&geo=citywide&identifier=&lat=40.763121171621314&lng=-73.94588470458984&lngLats=%255B%255D&mfat=true&minj=true&noInjFat=false&pfat=true&pinj=true&startDate=2019-07&zoom=12)
+
+
+--
+count:false
+- [NeurIPS 2019 Acceptance Stats](https://medium.com/@dcharrezt/neurips-2019-stats-c91346d31c8f)
+
+
+--
+count:false
+- Fake Flower Shop Demo
+
+
+---
+class: middle
+
+# Questions re DataScience?
+
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script>
+    // Config Remark
+    remark.macros['scale'] = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+    };
+    config_remark = {
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true,
+        ratio: "16:9"
+    };
+      var slideshow = remark.create(config_remark);
+
+    // Configure MathJax
+    MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] /* removed 'code' entry*/
+    }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
+  </body>
+</html>
