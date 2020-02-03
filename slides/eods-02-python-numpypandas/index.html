@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Python Intro/Review, Numpy and Pandas</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Garamond);
+      @import url(https://fonts.googleapis.com/css?family=Muli:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+Elements of Data Science - S2020
+
+# Python Intro/Review, Numpy and Pandas
+
+02/03/2020
+
+---
+# Python (Review?)
+.smallest[
+- Whitespace Formatting
+- Importing Modules
+- Functions
+- String Formatting
+- Exceptions and Try-Except
+- Assert
+- Basic Data Types
+- collections Module
+- Truthiness
+- Comparisons and Logical Operators
+- Control Flow
+- Sorting
+- List/Dict Comprehensions
+- Object Oriented Programming
+- Iterables and Generators
+- Randomness with random
+- Regular Expressions with re
+- zip and Argument Unpacking
+- args and kwargs
+- Type Annotations
+]
+
+---
+# Whitespace Formatting
+
+- Instead of braces or brackets to delimit blocks, whitespace
+
+.smaller[
+```python
+# The pound sign marks the start of a comment. Python itself
+# ignores the comments, but they're helpful for anyone reading the code.
+for i in [1, 2, 3, 4, 5]:
+    print(i)                    # first line in "for i" block
+    for j in [1, 2, 3, 4, 5]:
+        print(j)                # first line in "for j" block
+        print(i + j)            # last line in "for j" block
+    print(i)                    # last line in "for i" block
+print("done looping")
+```]
+
+
+<br/>
+--
+count:false
+- Style Guide : PEP 8 (https://www.python.org/dev/peps/pep-0008/)
+
+---
+# Importing Modules
+
+- Want to calculate square root?
+
+```python
+import math
+math.sqrt(2)
+```
+
+Want to import a submodule or function?
+
+```python
+from math import sqrt
+sqrt(2)
+```
+
+---
+# Importing Modules Cont.
+
+Want to import a module using an alias?
+
+```python 
+import math as m
+```
+
+--
+count:false
+
+Don't do!!!
+```python
+from math import *
+```
+
+
+---
+# Functions
+
+.smaller[
+```python
+def add_two(x):
+    """Adds 2 to the number passed in."""
+    return x+2
+```]
+
+--
+count:false
+```bash
+add_two(2)
+4
+```
+
+---
+# Functions With Defaults
+--
+count:false
+```python
+def add_amount(x,amount=2):
+    """Adds an amount to number, default to add is 2."""
+    return x+amount
+```
+
+--
+count:false
+```bash
+add_amount(2,4)
+6
+```
+
+---
+# String Formatting
+
+x = 3.1415
+
+
+--
+count:false
+- 'the value of x is ' + str(x)
+
+
+--
+count:false
+- 'the value of x is %0.2f' % x
+
+
+--
+count:false
+- 'the value of x is {:0.2f}'.format(x)
+
+
+--
+count:false
+- f'the value of x is {x:0.2f}'
+
+
+--
+count:false
+```python
+"""This is a multiline comment.
+The value of x is {}.""".format(x)
+```
+
+
+--
+count:false
+- common specifiers: %s strings, %d integers, %f floats
+
+--
+count:false
+- to learn more https://realpython.com/python-string-formatting/
+
+
+---
+# Exceptions
+--
+count:false
+```python
+add_amount("two",4)
+```
+
+--
+count:false
+```python
+TypeError: can only concatenate str (not "int") to str
+```
+
+--
+count:false
+Other common exceptions:
+- SyntaxError
+- IndentationError
+- ValueError
+- TypeError
+- IndexError
+- KeyError
+- and many more https://docs.python.org/3/library/exceptions.html
+
+---
+# Try-Except
+
+```python
+try:
+    add_amount('two',4)
+except TypeError as e:
+    print("ERROR!!!",e)
+```
+
+--
+count:false
+```bash
+ERROR!!! can only concatenate str (not "int") to str
+```
+
+???
+
+.smaller[
+```python
+def print_hello(num_times=1):
+    """Prints the string 'hello' a requested number of times."""
+    print(' '.join(["hello"]*num_times))
+```]
+
+---
+# Assert
+
+- use `assert` to test anything we know should be true
+- simple unit test
+- only returns something when assertion is false
+
+--
+count:false
+
+```python
+>>> assert add_amount(2,4) == 6
+```
+
+--
+count:false
+
+```python
+>>> assert 1 == 0
+AssertionError:
+```
+
+--
+count:false
+
+```python
+>>> assert 1 == 0, "1 does not equal 0"
+AssertionError: 1 does not equal 0
+```
+
+---
+#Basic Python Data Types
+
+--
+count:false
+- **int** : `42`
+
+
+--
+count:false
+- **float** : `4.2`,`4e2`
+
+
+--
+count:false
+- **boolean (bool)** : `True`,`False`
+
+
+--
+count:false
+- **string (str)** : `'num 42'`,`"num 42"`
+
+
+--
+count:false
+- **none/null**: `None`
+
+
+<br/>
+--
+count:false
+- also `long`, `complex`, `bytes`, etc.
+
+---
+#Python Data Types Continued
+
+--
+count:false
+- **list** : `x = [42,'e',2.0]`&nbsp;&nbsp;
+--
+count:false
+    - `x[0] == 42 # indexing`
+--
+count:false
+    - `x[2] = 4 # assignment`
+--
+count:false
+    - `x.pop(2) # delete`
+
+
+--
+count:false
+- **dict** : `x = {'b':2,'a':1,'c':4}`
+--
+count:false
+    - `x['b'] == 2 # indexing`
+--
+count:false
+    - `x['d'] = 3 # assignment`
+--
+count:false
+    - `x.pop('d',None) # delete`
+--
+count:false
+    - `x.keys()`
+--
+count:false
+    - `x.values()`
+--
+count:false
+    - `x.items()`
+
+---
+#Python Data Types Continued
+<br>
+
+--
+count:false
+- **tuple** : `x = (2,'e')`
+--
+count:false
+    - `x[0] == 2 # indexing`
+--
+count:false
+    - `x[0] = 3 # assignment? Nope, error: immutable`
+
+--
+count:false
+- **set** : `x = {2,'e','e'}`
+--
+count:false
+    - `x.add(1)`
+--
+count:false
+    - `x.remove('e')`
+--
+count:false
+    - `x.intersection({2,3})`
+--
+count:false
+    - `x.difference({2,3})`
+
+
+---
+# `collections` Module
+
+
+--
+count:false
+```python
+from collections import Counter, OrderedDict, defaultdict
+```
+
+--
+count:false
+- Counter : useful for counting hashable objects
+
+--
+count:false
+
+```python
+>>> c = Counter(['red', 'blue', 'red', 'green', 'blue', 'blue'])
+>>> c
+Counter({'red': 2, 'blue': 3, 'green': 1})
+```
+
+--
+count:false
+
+```python
+>>> c = Counter()
+>>> for word in ['red', 'blue', 'red', 'green', 'blue', 'blue']:
+...     c[word] += 1
+```
+
+--
+count:false
+```python
+>>> c.most_common()
+[('blue', 3), ('red', 2), ('green', 1)]
+```
+
+
+
+---
+# `collections` Module Cont.
+
+--
+count:false
+- defaultdict : supplies missing values
+
+```python
+>>> d = defaultdict(list)
+```
+--
+count:false
+```python
+>>> # create mapping from length of word to list of words
+... for word in ['red', 'blue', 'purple', 'gold', 'orange']:
+...     d[len(word)].append(word)
+>>> d
+defaultdict(list, {3: ['red'], 
+                   4: ['blue', 'gold'],
+                   6: ['purple', 'orange']})
+```
+
+--
+count:false
+- OrderedDict : remembers order added
+
+--
+count:false
+- others : https://docs.python.org/3.7/library/collections.html
+
+---
+# Truthiness
+
+--
+count:false
+boolean: True, False
+
+--
+count:false
+These all translate to False:
+ - False
+ - None
+ - []
+ - {}
+ - ""
+ - set()
+ - 0
+ - 0.0
+
+---
+# Python Comparisons and Logical Operators
+<br/>
+
+
+--
+count:false
+- `==, !=, &lt;, &gt;, &lt;=, &gt;=`
+
+
+--
+count:false
+- `is, and, or, not`
+
+<br/>
+--
+count:false
+bitwise operators, we'll see these in numpy and pandas
+- `&amp;, | , ~` 
+
+
+--
+count:false
+- `any()`: at least one element is true
+- `all()`: all elements are true
+
+---
+# Control Flow
+
+--
+count:false
+- if then elif then else
+
+```python
+>>> if x &gt; 0:
+...     print('x &gt; 0')
+... elif x &lt; 0:
+...     print('x &lt; 0')
+... else:
+...     print('x == 0')
+```
+
+--
+count:false
+
+- single line if then else
+
+```python
+>>> "x &lt; 0" if (x &lt; 0) else "x &gt;= 0"
+```
+
+---
+# More Control Flow
+
+--
+count:false
+- for loop
+
+```python
+>>> for x in [0,1,2,3,4]:
+...     print(x)
+```
+
+--
+count:false
+- while loop
+
+```python
+>>> x = 0
+... while x &lt; 5:
+...     print(x)
+...     x += 1
+```
+
+---
+# More Control Flow
+
+--
+count:false
+- `break` : break out of current loop
+
+```python
+>>> x = 0
+... while True:
+...     print(x)
+...     x += 1
+...     if x == 5:
+...         break
+```
+
+--
+count:false
+- `continue` : continue immediately to next iteration of loop
+
+```python
+>>> for x in range(5):
+...     if x == 1:
+...         continue
+...     print(x)
+```
+
+---
+# Sorting
+
+--
+count:false
+Two ways to sort a list:
+
+--
+count:false
+1. by changing the list itself: `list.sort()`
+.smaller[
+```python
+x = [4,1,2,3]
+x.sort()
+assert x == [1,2,3,4]
+```]
+--
+count:false
+2. without changing the list: `sorted()`
+.smaller[
+```python
+x = [4,1,2,3]
+y = sorted(x)
+assert x == [4,1,2,3]
+assert y == [1,2,3,4]
+```]
+
+---
+# Sorting Cont.
+
+--
+count:false
+- To sort descending, use `reverse=True`:
+.smaller[
+```python
+x = [4,1,2,3]
+assert sorted(x, reverse=True) == [4,3,2,1]
+```]
+
+--
+count:false
+- Pass a function to 'key' to specify what to sort by:
+```python
+d = {'a':3,'b':5,'c':1}
+s = sorted(d.items(), key=lambda x: x[1])
+assert s == [('c', 1), ('a', 3), ('b', 5)]
+```
+
+
+---
+# List/Dict Comprehensions
+
+--
+count:false
+- List Comprehension
+
+```python
+>>> y = range(1,6) # [1,2,3,4,5]
+>>> [x%2 for x in y]
+[1, 0, 1, 0, 1]
+```
+--
+count:false
+```python
+>>> [i for i,x in enumerate(y) if x%2 == 0]
+[1, 3]
+```
+
+--
+count:false
+- Dict Comprehension
+
+```python
+>>> pairs = ((1,'e'),(3,'f'))
+>>> x = {key:'value_'+val for key,val in pairs}
+>>> x
+{1: 'value_e', 3: 'value_f'}
+```
+
+---
+# Object Oriented Programming
+
+--
+count:false
+```python
+class MyClass:
+    """A descriptive docstring."""
+
+    def __init__(self,myvalue = 0):  # what happens when created 
+        self.myvalue = myvalue
+
+    def __repr__(self):   # what gets printed out (string repr.)
+        return f'MyClass(myvalue={self.myvalue})'
+
+    def get_value(self):
+        """Return the value in myvalue."""
+        return self.myvalue
+
+
+x = MyClass(100)
+assert x.get_value() == 100
+```
+
+
+---
+# Iterables and Generators
+
+--
+count:false
+- **Iterable**: anything we can iterate over, eg list
+
+--
+count:false
+- **Iterator**: 
+    - the object doing the iterating
+    - can use `.next()` to get the next value in the iterable
+    - every iterator is an iterable, but reverse not always true
+
+--
+count:false
+```python
+x = [1,2,3]
+iter_obj = iter(x)
+assert next(iter_obj) == 1
+```
+
+---
+# Iterables and Generators Cont
+
+--
+count:false
+- **Generator**
+ - generates values *lazily* on demand (values not stored in memory)
+ - contains a `yield` operator
+ - can use `.next()` to get the next value
+ - or wrap in comprehension or list to generate all
+
+--
+count:false
+```python
+def generate_ones(n):
+    i = 0
+    while i &lt; n:
+        yield 1
+        i += 1
+
+assert list(generate_ones(3)) == [1,1,1]
+```
+
+
+---
+# Randomness with `random`
+
+--
+count:false
+- generates *pseudo-random* numbers
+
+
+--
+count:false
+- samples from uniform [0,1]
+ - `random.random()` 
+
+--
+count:false
+- permutate an iterable
+ - `random.shuffle()` 
+
+--
+count:false
+- random sample with replacement from iterable
+ - `random.choice()` 
+
+--
+count:false
+- set the seed for reproducibility
+ - `random.seed()`
+
+
+--
+count:false
+- The `numpy` module provides more functionality
+
+
+---
+# Regular Expressions with `random`
+
+--
+count:false
+- Regular Expression: string for describing a search pattern
+
+--
+count:false
+- Can be used for finding, matching, splitting, etc.
+
+--
+count:false
+- Powerful, can be simple to very complex
+
+--
+count:false
+- We'll see more examples later on
+
+
+--
+count:false
+- See https://docs.python.org/3/library/re.html for more info
+- See https://regex101.com/ to try them out
+
+---
+# `zip` and Argument Unpacking
+
+--
+count:false
+- Often need to join two lists
+- zip lazily creates pairwise combinations of iterables
+
+.smaller[
+```python
+l1 = [0,1,2]
+l2 = [x+10 for x in l1]
+pairs = list(zip(l1,l2))
+
+assert pairs == [(0,10),(1,11),(2,12)]
+```]
+
+--
+count:false
+- use `zip(*iterable)` to unzip
+
+.smaller[
+```python
+assert l1,l2 == zip(*pairs)
+```]
+
+--
+count:false
+- will also see * for unpacking arguments
+
+.smaller[
+```python
+process_two_lists(*pairs)
+```]
+
+
+
+---
+# `args` and `kwargs`
+
+--
+count:false
+- often need to define functions that take arbitrary number of arguments
+- use `args`,`kwargs` and argument unpacking
+- *args becomes a list
+- **kwargs becomes a dictionary
+
+--
+count:false
+```python
+def join_chars(*args,**kwargs):
+    return kwargs['sep'].join(args)
+
+assert join_chars('a','b',sep=',') == 'a,b'
+```
+
+---
+# Type Annotations
+
+- python is **dynamically typed**
+
+```python
+x = 2
+x = 'two'
+```
+
+--
+count:false
+
+- if we want to add information, use **type annotations**
+- not strictly **statically typed**, but can be helpful 
+- for documentation, code completion, ...
+
+```python
+def add_amount(x: int, amount: int) -&gt; int:
+    return x+amount
+```
+
+---
+# Other Useful Functions
+
+--
+count:false
+```python
+>>> len([0,1,2,3]) # get number of items in container
+4
+```
+
+
+--
+count:false
+
+```python
+>>> list(range(3)) # create list of numbers
+[0, 1, 2]
+```
+
+```python
+>>> list(range(2,5,2)) # start, end+1, step-size
+[2, 4]
+```
+
+
+--
+count:false
+```python
+>>> list(enumerate(['a','b','c'])) # list of index, value
+[(0, 'a'), (1, 'b'), (2, 'c')]
+```
+
+---
+class:middle
+
+# Questions re Python?
+
+---
+#Working with Data
+<br/>
+
+Want to:
+--
+count:false
+
+--
+count:false
+- transform and select data quickly (numpy)
+
+
+--
+count:false
+- manipulate datasets: load, save, group, join, etc. (pandas)
+
+
+--
+count:false
+- keep things organized (pandas)
+
+
+
+
+
+---
+# Intro to NumPy
+
+.center[
+![:scale 25%](images/NumPy_logo.svg)]
+
+--
+count:false
+ Provides (from numpy.org):
+
+--
+count:false
+ - a powerful N-dimensional array object
+
+
+--
+count:false
+ - sophisticated (broadcasting) functions
+
+
+--
+count:false
+ - linear algebra and random number capabilities
+
+
+--
+count:false
+- (Fourier transform, tools for integrating C/C++ and Fortran code, etc.)
+
+
+---
+#Python Dynamic Typing
+
+--
+count:false
+```python
+>>> for x in my_iterable:
+...     print(x)
+```
+--
+count:false
+```python
+>>> x = 5
+>>> x = 'five'
+```
+--
+count:false
+- Note: still *strongly* typed
+
+```python
+>>> x,y = 5,'five'
+>>> x+y
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+```
+
+---
+#Python Dynamic Typing
+<br/>
+
+
+--
+count:false
+
+<br/>
+.middle.center[
+![](images/cint_vs_pyint.png)]
+<br/>
+<br/>
+.small.bottom[[PDHS Chap 2.](https://jakevdp.github.io/PythonDataScienceHandbook/02.01-understanding-data-types.html)]
+
+
+
+---
+#NumPy Array vs Python List:
+
+--
+count:false
+
+<br/>
+.middle.center[
+![:scale 75%](images/array_vs_list.png)]
+<br>
+.bottom.small[[PDHS Chap 2.](https://jakevdp.github.io/PythonDataScienceHandbook/02.01-understanding-data-types.html)]
+
+
+---
+#Importing NumPy
+<br>
+
+--
+count:false
+Using the alias `np`
+
+```python
+>>> import numpy as np
+```
+
+---
+#NumPy Datatypes
+.smaller[
+```
+bool_       Boolean (True or False) stored as a byte
+int_        Default integer type (same as C long; normally either int64 or int32)
+intc        Identical to C int (normally int32 or int64)
+intp        Integer used for indexing (same as C ssize_t; normally either int32 or int64)
+int8        Byte (-128 to 127)
+int16       Integer (-32768 to 32767)
+int32       Integer (-2147483648 to 2147483647)
+int64       Integer (-9223372036854775808 to 9223372036854775807)
+uint8       Unsigned integer (0 to 255)
+uint16      Unsigned integer (0 to 65535)
+uint32      Unsigned integer (0 to 4294967295)
+uint64      Unsigned integer (0 to 18446744073709551615)
+float_      Shorthand for float64.
+float16     Half precision float: sign bit, 5 bits exponent, 10 bits mantissa
+float32     Single precision float: sign bit, 8 bits exponent, 23 bits mantissa
+float64     Double precision float: sign bit, 11 bits exponent, 52 bits mantissa
+complex_	Shorthand for complex128.
+complex64   Complex number, represented by two 32-bit floats
+complex128  Complex number, represented by two 64-bit floats
+...
+```
+]
+
+---
+#NumPy Arrays
+
+--
+count:false
+```python
+>>> np.array([1,2,3])
+array([1, 2, 3])
+```
+
+--
+count:false
+```python
+>>> np.array([1,'two',3])
+array(['1', 'two', '3'], dtype='&lt;U21')
+```
+
+--
+count:false
+```ipython
+>>> np.ones(5,dtype=int)
+array([1, 1, 1, 1, 1])
+```
+
+--
+count:false
+```python
+>>> np.full((2,3),3.14)
+array([[3.14, 3.14, 3.14],
+       [3.14, 3.14, 3.14]])
+```
+
+---
+#NumPy Array Indexing
+
+--
+count:false
+```python
+>>> x = np.arange(1,6)
+>>> x
+array([1, 2, 3, 4, 5])
+```
+
+--
+count:false
+```python
+>>> x[0]
+1
+```
+
+--
+count:false
+```python
+>>> x[-1]
+5
+```
+
+--
+count:false
+```python
+>>> x[-2]
+4
+```
+
+
+---
+#NumPy Array Slicing
+
+--
+count:false
+```python
+>>> x
+array([1, 2, 3, 4, 5])
+```
+
+--
+count:false
+```python
+>>> x[:2]
+array([1, 2])
+```
+
+--
+count:false
+```python
+>>> x[3:]
+array([4, 5])
+```
+
+--
+count:false
+```python
+>>> x[-3:]
+array([3, 4, 5])
+```
+
+--
+count:false
+```python
+>>> x[1:3]
+array([2, 3])
+```
+
+---
+#NumPy Array Slicing with Steps
+
+--
+count:false
+```python
+>>> x
+array([1, 2, 3, 4, 5])
+```
+
+--
+count:false
+```python
+>>> x[1:4:2]
+array([2, 4])
+```
+
+--
+count:false
+
+```python
+>>> x[::-1]
+array([5, 4, 3, 2, 1])
+```
+
+---
+#NumPy Fancy Indexing
+
+--
+count:false
+Accessing multiple indexes at once
+
+--
+count:false
+```python
+>>> x = np.array([5,6,7,8])
+```
+
+--
+count:false
+```python
+>>> x[[0,3]]
+array([5, 8])
+```
+
+--
+count:false
+```python
+>>> x[[0,-1]]
+array([5, 8])
+```
+
+---
+#Boolean Indexing
+
+--
+count:false
+```python
+>>> x = np.array([5,6,7,8])
+```
+
+--
+count:false
+```python
+>>> x%2 == 0
+array([False,  True, False,  True])
+```
+
+--
+count:false
+```python
+>>> x[x%2 == 0]
+array([6, 8])
+```
+
+--
+count:false
+```python
+>>> x[x > 6]
+array([7, 8])
+```
+
+---
+#Bool Indexing And Bitwise Operators
+
+--
+count:false
+```python
+>>> (x%2 == 0)
+array([False,  True, False,  True])
+```
+
+--
+count:false
+```python
+>>> (x > 6)
+array([False, False,  True,  True])
+```
+
+--
+count:false
+```python
+>>> (x%2 == 0) & (x > 6)
+array([False, False, False,  True])
+
+```
+
+--
+count:false
+```python
+>>> x[(x%2 == 0) & (x > 6)]
+array([8])
+```
+
+---
+#Bool Indexing And Bitwise Operators
+
+--
+count:false
+and : &amp;
+
+```python
+>>> x[(x%2 == 0) & (x > 6)]
+array([8])
+```
+
+--
+count:false
+or : |
+
+```python
+>>> x[(x%2 == 0) | (x > 6)]
+array([6, 7, 8])
+```
+
+--
+count:false
+not : ~
+
+```python
+>>> x[~( (x%2 == 0) | (x > 6) )]
+array([5])
+```
+
+---
+# `&amp;`,`|` vs. `and`,`or`
+
+--
+count:false
+- `&amp;`, `|`, `~` operate on bits
+- Think arrays of 'True', 'False'
+- Operate element-wise
+
+
+--
+count:false
+- `and`, `or`, `not` operate on objects
+- Think single Boolean object
+- Evaluate entire object
+
+
+--
+count:false
+- see PDHS for more info
+
+
+---
+#Indexing Review
+
+--
+count:false
+- standard array (including reverse/negative)
+
+--
+count:false
+- slicing
+
+--
+count:false
+- fancy indexing
+
+--
+count:false
+- boolean indexing
+
+---
+#Multidimensional Lists
+
+--
+count:false
+```python
+>>> x = [[1,2,3],[4,5,6]] # list of lists
+>>> x
+[[1, 2, 3], [4, 5, 6]]
+```
+--
+count:false
+```python
+>>> x[0][0] # first row, first column
+1
+```
+--
+count:false
+```python
+>>> x[0] # first row
+[1, 2, 3]
+```
+--
+count:false
+```python
+>>> [row[0] for row in x] # first column?
+[1, 4]
+```
+
+---
+#NumPy Multidimensional Arrays
+--
+count:false
+```python
+>>> x = np.array([[1,2,3],[4,5,6]])
+>>> x
+array([[1, 2, 3],
+       [4, 5, 6]])
+```
+--
+count:false
+```python
+>>> x[0,0] # first row, first column
+1
+```
+--
+count:false
+```python
+>>> x[0,:] # first row
+array([1, 2, 3])
+```
+--
+count:false
+```python
+>>> x[:,0] # first column
+array([1, 4])
+```
+
+
+---
+#NumPy Array Attributes
+
+--
+count:false
+```python
+>>> x = np.array([[1,2,3],[4,5,6]])
+```
+--
+count:false
+```python
+*>>> x.ndim # number of dimensions
+2
+```
+
+--
+count:false
+```python
+*>>> x.shape # shape in each dimension
+(2,3)
+```
+
+--
+count:false
+```python
+*>>> x.size # size over all dimensions
+6
+```
+
+---
+#NumPy Operations (UFuncs)
+
+--
+count:false
+```python
+>>> x = [1,2,3]
+>>> y = [4,5,6]
+```
+--
+count:false
+```python
+*>>> x+y
+[1, 2, 3, 4, 5, 6]
+```
+<br>
+--
+count:false
+```python
+>>> x = np.array([1,2,3])
+>>> y = np.array([4,5,6])
+```
+--
+count:false
+```python
+*>>> x+y
+array([5, 7, 9])
+```
+
+
+---
+#NumPy Broadcasting
+
+Allows for vectorized computation on arrays of different sizes
+
+--
+count:false
+```python
+>>> x = [1,2,3]
+*>>> x**2
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for ** or pow(): 'list' and 'int'
+
+```
+--
+count:false
+```python
+>>> x = np.array([1,2,3])
+*>>> x**2
+array([1, 4, 9])
+```
+
+---
+#NumPy `random` Submodule
+
+Provides many random sampling functions
+
+--
+count:false
+`from numpy.random import ...`
+
+--
+count:false
+- `rand` : random floats
+
+--
+count:false
+- `randint` : random integers
+
+--
+count:false
+- `randn` : standard normal distribution
+
+--
+count:false
+- `permutation` : random permutation
+
+--
+count:false
+- `normal` : Gaussian normal distribution
+
+
+--
+count:false
+- `seed` : seed the random generator
+
+
+---
+#Intro to Pandas
+<br/>
+
+.center[
+![](images/pandas_logo.png)]
+
+--
+count:false
+pandas is an open source, BSD-licensed library providing:
+
+--
+count:false
+- **high-performance, easy-to-use data structures** and 
+
+--
+count:false
+- **data analysis tools**
+
+<br/>
+--
+count:false
+Importing Pandas:
+
+```python
+import pandas as pd
+```
+
+---
+#Pandas Series
+
+
+- 1D array of data (any numpy datatype) plus an associated **index** array
+
+--
+count:false
+
+```python
+>>> s = pd.Series(np.random.rand(4))
+>>> s
+0    0.641947
+1    0.327688
+2    0.907652
+3    0.072368
+dtype: float64
+```
+
+--
+count:false
+```python
+>>> s.values
+array([0.64194677, 0.32768794, 0.90765227, 0.07236816])
+```
+--
+count:false
+```python
+>>> s.index
+RangeIndex(start=0, stop=4, step=1)
+```
+
+---
+#Pandas Series Cont.
+
+--
+count:false
+```python
+>>> s = pd.Series(np.random.rand(4),index=['a','b','c','d'])
+>>> s
+a    0.630579
+b    0.265923
+c    0.756642
+d    0.930738
+dtype: float64
+```
+
+--
+count:false
+```python
+>>> s['a']
+0.6305786049043965
+```
+
+--
+count:false
+```python
+>>> s[['c','d']]
+c    0.756642
+d    0.930738
+dtype: float64
+```
+
+
+---
+#Pandas Series Cont.
+
+--
+count:false
+```python
+>>> s = pd.Series({'a':1,'b':2,'c':3,'d':4})
+>>> s
+a    1
+b    2
+c    3
+d    4
+dtype: int64
+```
+
+--
+count:false
+```python
+>>> s[s.index[-2:]]
+c    3
+d    4
+dtype: int64
+```
+
+---
+#Pandas DataFrame
+</br>
+
+--
+count:false
+- tabular datastructure
+--
+count:false
+- each column a single datatype
+--
+count:false
+- both row and column indices
+--
+count:false
+- single column == Series
+
+
+---
+#Pandas DataFrame Cont.
+
+--
+count:false
+
+```python
+>>> df = pd.DataFrame({'Year':[2017,2018,2018,2019],
+...                    'Class_Name':['A','A','B','A'],
+...                    'Measure1':[2.1,3.0,2.4,1.9]
+...                   })
+```
+
+--
+count:false
+
+```python
+>>> df
+   Year Class_Name  Measure1
+0  2017          A       2.1
+1  2018          A       3.0
+2  2018          B       2.4
+3  2019          A       1.9
+
+```
+
+---
+#Pandas DataFrame Cont.
+
+```python
+>>> data = [[2017,'A',2.1],
+...         [2018,'A',3.0],
+...         [2018,'B',2.4],
+...         [2019,'A',1.9]]
+```
+
+--
+count:false
+
+```python
+>>> df = pd.DataFrame(data,
+...                   columns=['Year','Class_Name','Measure1'],
+...                   index=['001','002','003','004'])
+```
+
+--
+count:false
+
+```python
+>>> df
+     Year Class_Name  Measure1
+001  2017          A       2.1
+002  2018          A       3.0
+003  2018          B       2.4
+004  2019          A       1.9
+
+```
+
+---
+#Pandas Attributes
+
+--
+count:false
+
+- Get shape of DataFrame : `shape`
+
+```python
+>>> df.shape
+(4, 3) # rows, columns
+```
+
+--
+count:false
+- Get index values : `index`
+
+```python
+>>> df.index
+Index(['001', '002', '003', '004'], dtype='object')
+```
+
+--
+count:false
+
+- Get column values : `columns`
+
+```python
+>>> df.columns
+Index(['Year', 'Class_Name', 'MeasureA'], dtype='object')
+```
+
+---
+#Pandas Indexing/Selection
+<br/>
+
+
+--
+count:false
+Select by label:
+- `.loc[]`
+
+--
+count:false
+
+```python
+>>> df.loc['001']
+Year          2017
+Class_Name       A
+MeasureA       2.1
+Name: 001, dtype: object
+
+```
+--
+count:false
+
+```python
+>>> df.loc['001','MeasureA']
+2.1
+```
+
+---
+#Pandas Indexing/Selection Cont.
+<br/>
+
+--
+count:false
+Select by index:
+- `.iloc[]`
+--
+count:false
+
+```python
+>>> df.iloc[0]
+Year          2017
+Class_Name       A
+MeasureA       2.1
+Name: 001, dtype: object
+
+```
+--
+count:false
+```python
+>>> df.iloc[0,2]
+2.1
+```
+
+---
+#Pandas Indexing/Selection Cont.
+
+--
+count:false
+Selecting multiple rows/columns: use list (fancy indexing)
+--
+count:false
+
+```python
+>>> df.loc[['002','004']]
+     Year Class_Name  MeasureA
+002  2018          A       3.0
+004  2019          A       1.9
+```
+
+--
+count:false
+
+```python
+>>> df.loc[['002','004'],['Year','MeasureA']]
+     Year  MeasureA
+002  2018       3.0
+004  2019       1.9
+```
+
+
+---
+#Pandas Slicing
+
+--
+count:false
+Get last two rows
+--
+count:false
+```python
+>>> df.iloc[-2:]
+     Year Class_Name  MeasureA
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+--
+count:false
+Get first two rows and first two columns
+--
+count:false
+
+```python
+>>> df.iloc[:2,:2]
+     Year Class_Name
+001  2017          A
+002  2018          A
+```
+
+---
+#Pandas Slicing Cont.
+
+--
+count:false
+Can also slice using labels:
+--
+count:false
+```python
+>>> df.loc['002':'004']
+     Year Class_Name  MeasureA
+002  2018          A       3.0
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+--
+count:false
+
+```python
+>>> df.loc['002':'004',:'Class_Name']
+     Year Class_Name
+002  2018          A
+003  2018          B
+004  2019          A
+
+```
+
+--
+count:false
+**NOTE: this is inclusive**
+
+---
+#Pandas Slicing Cont.
+
+How to indicate all rows or all columns? `:`
+
+--
+count:false
+
+```python
+>>> df.loc[:,'MeasureA']
+001    2.1
+002    3.0
+003    2.4
+004    1.9
+Name: MeasureA, dtype: float64
+```
+
+--
+count:false
+```python
+>>> df.iloc[2:,:]
+     Year Class_Name  MeasureA
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+---
+#Pandas Slicing Cont.
+
+--
+count:false
+
+Shortcut for columns:
+
+--
+count:false
+
+```python
+>>> df['MeasureA']
+001    2.1
+002    3.0
+003    2.4
+004    1.9
+Name: MeasureA, dtype: float64
+```
+
+--
+count:false
+
+```python
+>>> df[['Year','MeasureA']]
+     Year  MeasureA
+001  2017       2.1
+002  2018       3.0
+003  2018       2.4
+004  2019       1.9
+```
+
+
+---
+#Pandas Slicing Cont.
+
+--
+count:false
+
+Shortcut for columns:
+--
+count:false
+```python
+>>> df.Class_Name
+001    A
+002    A
+003    B
+004    A
+Name: Class_Name, dtype: object
+```
+
+--
+count:false
+
+Shortcut for columns + series:
+--
+count:false
+
+```python
+>>> df.Class_Name['001']
+'A'
+```
+
+---
+#Pandas Boolean Mask
+
+--
+count:false
+Get all records for Class_Name 'A'
+--
+count:false
+
+```python
+>>> df.loc[df.Class_Name == 'A']:
+     Year Class_Name  MeasureA
+001  2017          A       2.1
+002  2018          A       3.0
+004  2019          A       1.9
+
+```
+--
+count:false
+
+Get MeasureA for all records for Class_Name 'A':
+
+--
+count:false
+
+```python
+>>> df.loc[df.Class_Name == 'A','MeasureA']
+001    2.1
+002    3.0
+004    1.9
+Name: MeasureA, dtype: float64
+```
+
+---
+#Pandas Boolean Mask Cont.
+
+--
+count:false
+
+Get all records for class 'A' before 2019:
+
+--
+count:false
+
+```python
+>>> df.loc[(df.Class_Name == 'A') &amp; (df.Year &lt; 2019)]
+     Year Class_Name  MeasureA
+001  2017          A       2.1
+002  2018          A       3.0
+```
+
+--
+count:false
+
+Get all records in a set of years:
+
+--
+count:false
+
+```python
+>>> df.loc[df.Year.isin([2017,2019])]
+     Year Class_Name  MeasureA
+001  2017          A       2.1
+004  2019          A       1.9
+```
+
+---
+# Panda Selection Chaining
+
+--
+count:false
+Get 'Year' and 'MeasureA' for first 3 rows:
+
+--
+count:false
+
+```python
+>>> df.iloc[:3].loc[:,['Year','MeasureA']]
+     Year  MeasureA
+001  2017       2.1
+002  2018       3.0
+003  2018       2.4
+```
+
+--
+count:false
+
+For records '001' and '003' get last two columns:
+
+--
+count:false
+
+```python
+>>> df.loc[['001','003']].iloc[:,-2:]
+    Class_Name  MeasureA
+001          A       2.1
+003          B       2.4
+```
+
+
+---
+# Panda Selection Chaining Cont.
+
+--
+count:false
+
+For record '001' get last two columns?:
+
+--
+count:false
+
+```python
+>>> df.loc['001'].iloc[:,-2:]
+```
+
+--
+count:false
+
+
+```python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/bgibson/anaconda3/envs/eods-f19/lib/python3.7/site-packages/pandas/core/indexing.py", line 1418, in __getitem__
+    return self._getitem_tuple(key)
+  File "/home/bgibson/anaconda3/envs/eods-f19/lib/python3.7/site-packages/pandas/core/indexing.py", line 2092, in _getitem_tuple
+    self._has_valid_tuple(tup)
+  File "/home/bgibson/anaconda3/envs/eods-f19/lib/python3.7/site-packages/pandas/core/indexing.py", line 233, in _has_valid_tuple
+    raise IndexingError("Too many indexers")
+pandas.core.indexing.IndexingError: Too many indexers
+```
+
+--
+count:false
+
+```python
+>>> df.loc['001'].iloc[-2:] 
+```
+
+
+---
+# Pandas `head` and `tail`
+
+--
+count:false
+
+Get a quick view of the first or last rows in a DataFrame
+
+--
+count:false
+
+```python
+>>> df.head() # first 5 rows by default
+     Year Class_Name  MeasureA
+001  2017          A       2.1
+002  2018          A       3.0
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+--
+count:false
+
+```python
+>>> df.tail(2)
+     Year Class_Name  MeasureA
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+---
+#Pandas Selection Review
+
+--
+count:false
+
+- `.loc[]`
+
+--
+count:false
+
+- `.iloc[]`
+
+--
+count:false
+
+- Fancy Indexing
+
+--
+count:false
+
+- Slicing
+
+--
+count:false
+
+- Boolean Mask
+
+--
+count:false
+
+- Chaining
+
+--
+count:false
+
+- `head` and `tail`
+
+---
+class:middle
+
+# Questions re Pandas Selection?
+
+---
+class:middle
+
+# Questions?
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script>
+    // Config Remark
+    remark.macros['scale'] = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+    };
+    config_remark = {
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true,
+        ratio: "16:9"
+    };
+      var slideshow = remark.create(config_remark);
+
+    // Configure MathJax
+    MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] /* removed 'code' entry*/
+    }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
+  </body>
+</html>
