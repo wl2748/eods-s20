@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Week 2</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Garamond);
+      @import url(https://fonts.googleapis.com/css?family=Muli:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+Elements of Data Science - S2020
+
+# Week 2
+
+02/03/2020
+
+---
+# TODOs
+<br/>
+
+--
+count: false
+- Reading: 
+    - DSFS: Ch 3,4
+    - PDSH: Parts of Ch 2,3,4
+
+--
+count: false
+- Answer and submit Quiz 2
+
+
+
+---
+# PDSH Ch 2,3,4
+
+.smaller[
+- Ch 2. Introduction to NumPy
+    - Understanding Data Types in Python
+    - The Basics of NumPy Arrays
+    - <span style="color:gray;">Computation on NumPy Arrays: Universal Functions</span>
+    - Aggregations: Min, Max, and Everything In Between
+    - <span style="color:gray;">Computation on Arrays: Broadcasting</span>
+    - Comparisons, Masks, and Boolean Logic
+    - <span style="color:gray;">Fancy Indexing</span>
+    - Sorting Arrays
+    - <span style="color:gray;">Structured Data: NumPy's Structured Arrays</span>
+]
+
+---
+# PDSH Ch 2,3,4
+
+.smaller[
+- Ch 3. Data Manipulation with Pandas
+    - Introducing Pandas Objects
+    - Data Indexing and Selection
+    - <span style="color:gray;">Operating on Data in Pandas</span>
+    - Handling Missing Data
+    - <span style="color:gray;">Hierarchical Indexing</span>
+    - <span style="color:gray;">Combining Datasets: Concat and Append</span>
+    - <span style="color:gray;">Combining Datasets: Merge and Join</span>
+    - <span style="color:gray;">Aggregation and Grouping</span>
+    - <span style="color:gray;">Pivot Tables</span>
+    - <span style="color:gray;">Vectorized String Operations</span>
+    - <span style="color:gray;">Working with Time Series</span>
+    - <span style="color:gray;">High-Performance Pandas: eval() and query()</span>
+]
+
+---
+# PDSH Ch 2,3,4
+.smaller[
+- Ch 4. Visualization with Matplotlib
+    - Simple Line Plots
+    - Simple Scatter Plots
+    - <span style="color:gray;">Visualizing Errors</span>
+    - <span style="color:gray;">Density and Contour Plots</span>
+    - <span style="color:gray;">Histograms, Binnings, and Density</span>
+    - <span style="color:gray;">Customizing Plot Legends</span>
+    - <span style="color:gray;">Customizing Colorbars</span>
+    - Multiple Subplots
+    - <span style="color:gray;">Text and Annotation</span>
+    - <span style="color:gray;">Customizing Ticks</span>
+    - <span style="color:gray;">Customizing Matplotlib: Configurations and Stylesheets</span>
+    - Three-Dimensional Plotting in Matplotlib
+    - <span style="color:gray;">Geographic Data with Basemap</span>
+    - Visualization with Seaborn
+]
+
+---
+# Today
+<br/>
+
+--
+count:false
+- Python Intro/Review
+
+--
+count:false
+- Numpy and Pandas
+
+--
+count:false
+- Visualization in Python?
+
+
+---
+# Reminder: Getting Changes from Git
+
+```
+$ cd [to_repository]
+$ git pull
+```
+
+---
+class:middle
+
+# Questions?
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script>
+    // Config Remark
+    remark.macros['scale'] = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+    };
+    config_remark = {
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true,
+        ratio: "16:9"
+    };
+      var slideshow = remark.create(config_remark);
+
+    // Configure MathJax
+    MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] /* removed 'code' entry*/
+    }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
+  </body>
+</html>
