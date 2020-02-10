@@ -410,6 +410,673 @@ class:middle
 
 
 ---
+#Intro to Pandas
+<br/>
+
+.center[
+![](images/pandas_logo.png)]
+
+--
+count:false
+pandas is an open source, BSD-licensed library providing:
+
+--
+count:false
+- **high-performance, easy-to-use data structures** and 
+
+--
+count:false
+- **data analysis tools**
+
+<br/>
+--
+count:false
+Importing Pandas:
+
+```python
+import pandas as pd
+```
+
+---
+#Pandas Series
+
+
+- 1D array of data (any numpy datatype) plus an associated **index** array
+
+--
+count:false
+
+```python
+>>> s = pd.Series(np.random.rand(4))
+>>> s
+0    0.641947
+1    0.327688
+2    0.907652
+3    0.072368
+dtype: float64
+```
+
+--
+count:false
+```python
+>>> s.values
+array([0.64194677, 0.32768794, 0.90765227, 0.07236816])
+```
+--
+count:false
+```python
+>>> s.index
+RangeIndex(start=0, stop=4, step=1)
+```
+
+---
+#Pandas Series Cont.
+
+--
+count:false
+```python
+>>> s = pd.Series(np.random.rand(4),index=['a','b','c','d'])
+>>> s
+a    0.630579
+b    0.265923
+c    0.756642
+d    0.930738
+dtype: float64
+```
+
+--
+count:false
+```python
+>>> s['a']
+0.6305786049043965
+```
+
+--
+count:false
+```python
+>>> s[['c','d']]
+c    0.756642
+d    0.930738
+dtype: float64
+```
+
+
+---
+#Pandas Series Cont.
+
+--
+count:false
+```python
+>>> s = pd.Series({'a':1,'b':2,'c':3,'d':4})
+>>> s
+a    1
+b    2
+c    3
+d    4
+dtype: int64
+```
+
+--
+count:false
+```python
+>>> s[s.index[-2:]]
+c    3
+d    4
+dtype: int64
+```
+
+---
+#Pandas DataFrame
+</br>
+
+--
+count:false
+- tabular datastructure
+--
+count:false
+- each column a single datatype
+--
+count:false
+- both row and column indices
+--
+count:false
+- single column == Series
+
+
+---
+#Pandas DataFrame Cont.
+
+--
+count:false
+
+```python
+>>> df = pd.DataFrame({'Year':[2017,2018,2018,2019],
+...                    'Class_Name':['A','A','B','A'],
+...                    'Measure1':[2.1,3.0,2.4,1.9]
+...                   })
+```
+
+--
+count:false
+
+```python
+>>> df
+   Year Class_Name  Measure1
+0  2017          A       2.1
+1  2018          A       3.0
+2  2018          B       2.4
+3  2019          A       1.9
+
+```
+
+---
+#Pandas DataFrame Cont.
+
+```python
+>>> data = [[2017,'A',2.1],
+...         [2018,'A',3.0],
+...         [2018,'B',2.4],
+...         [2019,'A',1.9]]
+```
+
+--
+count:false
+
+```python
+>>> df = pd.DataFrame(data,
+...                   columns=['Year','Class_Name','Measure1'],
+...                   index=['001','002','003','004'])
+```
+
+--
+count:false
+
+```python
+>>> df
+     Year Class_Name  Measure1
+001  2017          A       2.1
+002  2018          A       3.0
+003  2018          B       2.4
+004  2019          A       1.9
+
+```
+
+---
+#Pandas Attributes
+
+--
+count:false
+
+- Get shape of DataFrame : `shape`
+
+```python
+>>> df.shape
+(4, 3) # rows, columns
+```
+
+--
+count:false
+- Get index values : `index`
+
+```python
+>>> df.index
+Index(['001', '002', '003', '004'], dtype='object')
+```
+
+--
+count:false
+
+- Get column values : `columns`
+
+```python
+>>> df.columns
+Index(['Year', 'Class_Name', 'MeasureA'], dtype='object')
+```
+
+---
+#Pandas Indexing/Selection
+<br/>
+
+
+--
+count:false
+Select by label:
+- `.loc[]`
+
+--
+count:false
+
+```python
+>>> df.loc['001']
+Year          2017
+Class_Name       A
+MeasureA       2.1
+Name: 001, dtype: object
+
+```
+--
+count:false
+
+```python
+>>> df.loc['001','MeasureA']
+2.1
+```
+
+---
+#Pandas Indexing/Selection Cont.
+<br/>
+
+--
+count:false
+Select by index:
+- `.iloc[]`
+--
+count:false
+
+```python
+>>> df.iloc[0]
+Year          2017
+Class_Name       A
+MeasureA       2.1
+Name: 001, dtype: object
+
+```
+--
+count:false
+```python
+>>> df.iloc[0,2]
+2.1
+```
+
+---
+#Pandas Indexing/Selection Cont.
+
+--
+count:false
+Selecting multiple rows/columns: use list (fancy indexing)
+--
+count:false
+
+```python
+>>> df.loc[['002','004']]
+     Year Class_Name  MeasureA
+002  2018          A       3.0
+004  2019          A       1.9
+```
+
+--
+count:false
+
+```python
+>>> df.loc[['002','004'],['Year','MeasureA']]
+     Year  MeasureA
+002  2018       3.0
+004  2019       1.9
+```
+
+
+---
+#Pandas Slicing
+
+--
+count:false
+Get last two rows
+--
+count:false
+```python
+>>> df.iloc[-2:]
+     Year Class_Name  MeasureA
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+--
+count:false
+Get first two rows and first two columns
+--
+count:false
+
+```python
+>>> df.iloc[:2,:2]
+     Year Class_Name
+001  2017          A
+002  2018          A
+```
+
+---
+#Pandas Slicing Cont.
+
+--
+count:false
+Can also slice using labels:
+--
+count:false
+```python
+>>> df.loc['002':'004']
+     Year Class_Name  MeasureA
+002  2018          A       3.0
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+--
+count:false
+
+```python
+>>> df.loc['002':'004',:'Class_Name']
+     Year Class_Name
+002  2018          A
+003  2018          B
+004  2019          A
+
+```
+
+--
+count:false
+**NOTE: this is inclusive**
+
+---
+#Pandas Slicing Cont.
+
+How to indicate all rows or all columns? `:`
+
+--
+count:false
+
+```python
+>>> df.loc[:,'MeasureA']
+001    2.1
+002    3.0
+003    2.4
+004    1.9
+Name: MeasureA, dtype: float64
+```
+
+--
+count:false
+```python
+>>> df.iloc[2:,:]
+     Year Class_Name  MeasureA
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+---
+#Pandas Slicing Cont.
+
+--
+count:false
+
+Shortcut for columns:
+
+--
+count:false
+
+```python
+>>> df['MeasureA']
+001    2.1
+002    3.0
+003    2.4
+004    1.9
+Name: MeasureA, dtype: float64
+```
+
+--
+count:false
+
+```python
+>>> df[['Year','MeasureA']]
+     Year  MeasureA
+001  2017       2.1
+002  2018       3.0
+003  2018       2.4
+004  2019       1.9
+```
+
+
+---
+#Pandas Slicing Cont.
+
+--
+count:false
+
+Shortcut for columns:
+--
+count:false
+```python
+>>> df.Class_Name
+001    A
+002    A
+003    B
+004    A
+Name: Class_Name, dtype: object
+```
+
+--
+count:false
+
+Shortcut for columns + series:
+--
+count:false
+
+```python
+>>> df.Class_Name['001']
+'A'
+```
+
+---
+#Pandas Boolean Mask
+
+--
+count:false
+Get all records for Class_Name 'A'
+--
+count:false
+
+```python
+>>> df.loc[df.Class_Name == 'A']:
+     Year Class_Name  MeasureA
+001  2017          A       2.1
+002  2018          A       3.0
+004  2019          A       1.9
+
+```
+--
+count:false
+
+Get MeasureA for all records for Class_Name 'A':
+
+--
+count:false
+
+```python
+>>> df.loc[df.Class_Name == 'A','MeasureA']
+001    2.1
+002    3.0
+004    1.9
+Name: MeasureA, dtype: float64
+```
+
+---
+#Pandas Boolean Mask Cont.
+
+--
+count:false
+
+Get all records for class 'A' before 2019:
+
+--
+count:false
+
+```python
+>>> df.loc[(df.Class_Name == 'A') &amp; (df.Year &lt; 2019)]
+     Year Class_Name  MeasureA
+001  2017          A       2.1
+002  2018          A       3.0
+```
+
+--
+count:false
+
+Get all records in a set of years:
+
+--
+count:false
+
+```python
+>>> df.loc[df.Year.isin([2017,2019])]
+     Year Class_Name  MeasureA
+001  2017          A       2.1
+004  2019          A       1.9
+```
+
+---
+# Panda Selection Chaining
+
+--
+count:false
+Get 'Year' and 'MeasureA' for first 3 rows:
+
+--
+count:false
+
+```python
+>>> df.iloc[:3].loc[:,['Year','MeasureA']]
+     Year  MeasureA
+001  2017       2.1
+002  2018       3.0
+003  2018       2.4
+```
+
+--
+count:false
+
+For records '001' and '003' get last two columns:
+
+--
+count:false
+
+```python
+>>> df.loc[['001','003']].iloc[:,-2:]
+    Class_Name  MeasureA
+001          A       2.1
+003          B       2.4
+```
+
+
+---
+# Panda Selection Chaining Cont.
+
+--
+count:false
+
+For record '001' get last two columns?:
+
+--
+count:false
+
+```python
+>>> df.loc['001'].iloc[:,-2:]
+```
+
+--
+count:false
+
+
+```python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/bgibson/anaconda3/envs/eods-f19/lib/python3.7/site-packages/pandas/core/indexing.py", line 1418, in __getitem__
+    return self._getitem_tuple(key)
+  File "/home/bgibson/anaconda3/envs/eods-f19/lib/python3.7/site-packages/pandas/core/indexing.py", line 2092, in _getitem_tuple
+    self._has_valid_tuple(tup)
+  File "/home/bgibson/anaconda3/envs/eods-f19/lib/python3.7/site-packages/pandas/core/indexing.py", line 233, in _has_valid_tuple
+    raise IndexingError("Too many indexers")
+pandas.core.indexing.IndexingError: Too many indexers
+```
+
+--
+count:false
+
+```python
+>>> df.loc['001'].iloc[-2:] 
+```
+
+
+---
+# Pandas `head` and `tail`
+
+--
+count:false
+
+Get a quick view of the first or last rows in a DataFrame
+
+--
+count:false
+
+```python
+>>> df.head() # first 5 rows by default
+     Year Class_Name  MeasureA
+001  2017          A       2.1
+002  2018          A       3.0
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+--
+count:false
+
+```python
+>>> df.tail(2)
+     Year Class_Name  MeasureA
+003  2018          B       2.4
+004  2019          A       1.9
+```
+
+---
+#Pandas Selection Review
+
+--
+count:false
+
+- `.loc[]`
+
+--
+count:false
+
+- `.iloc[]`
+
+--
+count:false
+
+- Fancy Indexing
+
+--
+count:false
+
+- Slicing
+
+--
+count:false
+
+- Boolean Mask
+
+--
+count:false
+
+- Chaining
+
+--
+count:false
+
+- `head` and `tail`
+
+---
+class:middle
+
+# Questions re Pandas Selection?
+
+---
 # Statistics and Data Exploration
 
 - For a new set of data, would like to know:
@@ -440,8 +1107,6 @@ count:false
 
 Records of Yellowcab Taxi trips from January 2017.
 
-Using 1000 random rows.
-
 more info: http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml
 
 ???
@@ -468,90 +1133,171 @@ df.to_csv('../data/yellow_tripdata_2017-01_subset10000rows.csv')
 
 .smallest[
 ```python
-df = pd.read_csv('../data/yellow_tripdata_2017-01_subset10000rows.csv',
-                 parse_dates=['tpep_pickup_datetime','tpep_dropoff_datetime'],
-                 nrows=1000)
-df.info()
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 1000 entries, 0 to 999
-Data columns (total 17 columns):
-VendorID                 1000 non-null int64
-tpep_pickup_datetime     1000 non-null datetime64[ns]
-tpep_dropoff_datetime    1000 non-null datetime64[ns]
-passenger_count          1000 non-null int64
-trip_distance            1000 non-null float64
-RatecodeID               1000 non-null int64
-store_and_fwd_flag       1000 non-null object
-PULocationID             1000 non-null int64
-DOLocationID             1000 non-null int64
-payment_type             1000 non-null int64
-fare_amount              1000 non-null float64
-extra                    1000 non-null float64
-mta_tax                  1000 non-null float64
-tip_amount               1000 non-null float64
-tolls_amount             1000 non-null float64
-improvement_surcharge    1000 non-null float64
-total_amount             1000 non-null float64
-dtypes: datetime64[ns](2), float64(8), int64(6), object(1)
-memory usage: 132.9+ KB
+>>> import pandas as pd
+>>> df = pd.read_csv('../data/yellowcab_demo.csv',
+                 parse_dates=['tpep_pickup_datetime','tpep_dropoff_datetime'])
 ```]
 
 
 ---
-# Extract and Engineer Columns
+# Aside: CSV
+
+- Comma Separated Values
+    - columns separated by delimiter, eg. [,\t|]
+    - one row per record, observation
+    - often, strings quoted
+    - often, first row of holumn headings
+    - sometimes, comment rows starting with #
+
 
 --
 count:false
-.smaller[
-```python
-df = df[['tpep_pickup_datetime','tpep_dropoff_datetime',
-         'trip_distance','fare_amount','tip_amount']]
+
+.smallest[
+```
+tpep_pickup_datetime,tpep_dropoff_datetime,trip_distance,fare_amount,tip_amount
+2017-01-10 18:37:59,2017-01-10 18:49:24,0.71,8.0,0.0
+2017-01-05 15:14:52,2017-01-05 15:23:28,1.16,7.5,1.66
+2017-01-11 14:47:52,2017-01-11 14:59:15,1.3,8.5,1.0
+2017-01-04 07:31:49,2017-01-04 07:39:21,0.8,6.5,0.0
+2017-01-12 17:43:50,2017-01-12 17:51:25,1.4,7.0,0.0
+2017-01-22 02:08:10,2017-01-22 02:18:43,3.47,12.0,0.0
+2017-01-25 19:28:25,2017-01-25 19:35:17,0.74,6.0,0.0
+2017-01-04 20:47:30,2017-01-04 21:01:24,2.68,11.5,3.84
+2017-01-17 08:09:14,2017-01-17 08:14:12,0.7,5.0,1.15
 ```]
 
---
-count:false
-.smaller[
-```python
-df['trip_duration'] = (df.tpep_dropoff_datetime -
-                       df.tpep_pickup_datetime).dt.seconds
-```]
 
---
-count:false
-.smaller[
+
+---
+# Display a Few Rows
+
+.smallest[
 ```python
-df.info()
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 1000 entries, 0 to 999
-Data columns (total 6 columns):
-tpep_pickup_datetime     1000 non-null datetime64[ns]
-tpep_dropoff_datetime    1000 non-null datetime64[ns]
-trip_distance            1000 non-null float64
-fare_amount              1000 non-null float64
-tip_amount               1000 non-null float64
-trip_duration            1000 non-null int64
-dtypes: datetime64[ns](2), float64(3), int64(1)
-memory usage: 47.0 KB
+# first 3 rows
+>>> df.head(3)
+ tpep_pickup_datetime tpep_dropoff_datetime  ...  fare_amount  tip_amount
+0  2017-01-10 18:37:59   2017-01-10 18:49:24  ...          8.0        0.00
+1  2017-01-05 15:14:52   2017-01-05 15:23:28  ...          7.5        1.66
+2  2017-01-11 14:47:52   2017-01-11 14:59:15  ...          8.5        1.00
+3  2017-01-04 07:31:49   2017-01-04 07:39:21  ...          6.5        0.00
+4  2017-01-12 17:43:50   2017-01-12 17:51:25  ...          7.0        0.00
+
+
+[5 rows x 5 columns]
 ```]
 
 ---
-# Generate Summary Stats and Visualizations
+# Get Size of Dataset
+
+```python
+>>> df.shape
+(1000, 5)
+```
+
+```python
+# rows 
+>>> f'{df.shape[0]} rows'
+'1000 rows'
+```
+
+```python
+# columns
+>>> f'{df.shape[1]} columns'
+'5 columns'
+```
+
+```python
+>>> 'number of rows: {}, number of columns: {}'.format(*df.shape)
+'number of rows: 1000, number of columns: 5'
+```
+
+---
+# Display Column Names
+
+- What are the column names?
 
 --
 count:false
-- Central tendencies
+
+.smallest[
+```python
+>>> df.columns
+Index(['tpep_pickup_datetime', 'tpep_dropoff_datetime', 'trip_distance',
+       'fare_amount', 'tip_amount'],
+      dtype='object')
+```]
 
 --
 count:false
-- Spread of data
+
+.smallest[
+```python
+>>> list(df.columns)
+['tpep_pickup_datetime',
+ 'tpep_dropoff_datetime',
+ 'trip_distance',
+ 'fare_amount',
+ 'tip_amount']
+```]
+
+---
+# Display Column Datatypes
+
+- What types of data are in each column?
 
 --
 count:false
-- Distributions
+
+.smallest[
+```python
+>>> df.dtypes
+tpep_pickup_datetime     datetime64[ns]
+tpep_dropoff_datetime    datetime64[ns]
+trip_distance                   float64
+fare_amount                     float64
+tip_amount                      float64
+dtype: object
+```]
 
 --
 count:false
-- Correlations
+
+.smallest[
+```python
+>>> type(df.dtypes)
+pandas.core.series.Series
+```]
+
+---
+# Ranges
+
+from scratch:
+
+--
+count:false
+
+```python
+>>> min(sorted(df.trip_distance))
+0.0
+```
+--
+count:false
+
+```python
+>>> max(sorted(df.trip_distance))
+30.11
+```
+
+--
+count:false
+
+Using pandas:
+
+```python
+>>> df.trip_distance.min(), df.trip_distance.max()
+0.0, 30.11
+```
 
 ---
 #Exploring Central Tendencies: Mean
@@ -601,6 +1347,22 @@ count:false
 --
 count:false
 - **Robust:** Not affected by outliers
+
+---
+# Summary Statistics with Describe
+
+```python
+>>> df.describe()
+       trip_distance  fare_amount   tip_amount
+count     1000.00000  1000.000000  1000.000000
+mean         2.83236    12.256540     1.824580
+std          3.61299    10.482271     2.425029
+min          0.00000     0.000000     0.000000
+25%          1.00000     6.500000     0.000000
+50%          1.64000     9.000000     1.450000
+75%          2.90000    13.625000     2.360000
+max         30.11000   125.000000    25.360000
+```
 
 
 ---
@@ -654,13 +1416,13 @@ count:false
 - Quartiles
 --
 count:false
-    - 25% of data is &le; first quartile, 25th percentile
+    - ~25% of data is &le; first quartile, 25th percentile
 --
 count:false
-    - 50% of data is &le; second quartile, 50th percentile (Median)
+    - `50% of data is &le; second quartile, 50th percentile (Median)
 --
 count:false
-    - 75% of data is &le; third quartile, 75th percentile
+    - `75% of data is &le; third quartile, 75th percentile
 
 --
 count:false
