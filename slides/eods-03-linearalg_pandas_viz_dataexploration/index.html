@@ -630,7 +630,7 @@ count:false
 
 ```python
 >>> df.columns
-Index(['Year', 'Class_Name', 'MeasureA'], dtype='object')
+Index(['Year', 'Class_Name', 'Measure1'], dtype='object')
 ```
 
 ---
@@ -647,10 +647,9 @@ Select by label:
 count:false
 
 ```python
->>> df.loc['001']
 Year          2017
 Class_Name       A
-MeasureA       2.1
+Measure1       2.1
 Name: 001, dtype: object
 
 ```
@@ -658,7 +657,7 @@ Name: 001, dtype: object
 count:false
 
 ```python
->>> df.loc['001','MeasureA']
+>>> df.loc['001','Measure1']
 2.1
 ```
 
@@ -677,7 +676,7 @@ count:false
 >>> df.iloc[0]
 Year          2017
 Class_Name       A
-MeasureA       2.1
+Measure1       2.1
 Name: 001, dtype: object
 
 ```
@@ -699,7 +698,7 @@ count:false
 
 ```python
 >>> df.loc[['002','004']]
-     Year Class_Name  MeasureA
+     Year Class_Name  Measure1
 002  2018          A       3.0
 004  2019          A       1.9
 ```
@@ -708,8 +707,8 @@ count:false
 count:false
 
 ```python
->>> df.loc[['002','004'],['Year','MeasureA']]
-     Year  MeasureA
+>>> df.loc[['002','004'],['Year','Measure1']]
+     Year  Measure1
 002  2018       3.0
 004  2019       1.9
 ```
@@ -725,7 +724,7 @@ Get last two rows
 count:false
 ```python
 >>> df.iloc[-2:]
-     Year Class_Name  MeasureA
+     Year Class_Name  Measure1
 003  2018          B       2.4
 004  2019          A       1.9
 ```
@@ -753,7 +752,7 @@ Can also slice using labels:
 count:false
 ```python
 >>> df.loc['002':'004']
-     Year Class_Name  MeasureA
+     Year Class_Name  Measure1
 002  2018          A       3.0
 003  2018          B       2.4
 004  2019          A       1.9
@@ -784,19 +783,19 @@ How to indicate all rows or all columns? `:`
 count:false
 
 ```python
->>> df.loc[:,'MeasureA']
+>>> df.loc[:,'Measure1']
 001    2.1
 002    3.0
 003    2.4
 004    1.9
-Name: MeasureA, dtype: float64
+Name: Measure1, dtype: float64
 ```
 
 --
 count:false
 ```python
 >>> df.iloc[2:,:]
-     Year Class_Name  MeasureA
+     Year Class_Name  Measure1
 003  2018          B       2.4
 004  2019          A       1.9
 ```
@@ -813,7 +812,7 @@ Shortcut for columns:
 count:false
 
 ```python
->>> df['MeasureA']
+>>> df['Measure1']
 001    2.1
 002    3.0
 003    2.4
@@ -825,8 +824,8 @@ Name: MeasureA, dtype: float64
 count:false
 
 ```python
->>> df[['Year','MeasureA']]
-     Year  MeasureA
+>>> df[['Year','Measure1']]
+     Year  Measure1
 001  2017       2.1
 002  2018       3.0
 003  2018       2.4
@@ -875,7 +874,7 @@ count:false
 
 ```python
 >>> df.loc[df.Class_Name == 'A']:
-     Year Class_Name  MeasureA
+     Year Class_Name  Measure1
 001  2017          A       2.1
 002  2018          A       3.0
 004  2019          A       1.9
@@ -884,17 +883,17 @@ count:false
 --
 count:false
 
-Get MeasureA for all records for Class_Name 'A':
+Get Measure1 for all records for Class_Name 'A':
 
 --
 count:false
 
 ```python
->>> df.loc[df.Class_Name == 'A','MeasureA']
+>>> df.loc[df.Class_Name == 'A','Measure1']
 001    2.1
 002    3.0
 004    1.9
-Name: MeasureA, dtype: float64
+Name: Measure1, dtype: float64
 ```
 
 ---
@@ -910,7 +909,7 @@ count:false
 
 ```python
 >>> df.loc[(df.Class_Name == 'A') &amp; (df.Year &lt; 2019)]
-     Year Class_Name  MeasureA
+     Year Class_Name  Measure1
 001  2017          A       2.1
 002  2018          A       3.0
 ```
@@ -925,7 +924,7 @@ count:false
 
 ```python
 >>> df.loc[df.Year.isin([2017,2019])]
-     Year Class_Name  MeasureA
+     Year Class_Name  Measure1
 001  2017          A       2.1
 004  2019          A       1.9
 ```
@@ -935,14 +934,14 @@ count:false
 
 --
 count:false
-Get 'Year' and 'MeasureA' for first 3 rows:
+Get 'Year' and 'Measure1' for first 3 rows:
 
 --
 count:false
 
 ```python
->>> df.iloc[:3].loc[:,['Year','MeasureA']]
-     Year  MeasureA
+>>> df.iloc[:3].loc[:,['Year','Measure1']]
+     Year  Measure1
 001  2017       2.1
 002  2018       3.0
 003  2018       2.4
@@ -958,7 +957,7 @@ count:false
 
 ```python
 >>> df.loc[['001','003']].iloc[:,-2:]
-    Class_Name  MeasureA
+    Class_Name  Measure1
 001          A       2.1
 003          B       2.4
 ```
@@ -1015,12 +1014,11 @@ Get a quick view of the first or last rows in a DataFrame
 count:false
 
 ```python
->>> df.head() # first 5 rows by default
-     Year Class_Name  MeasureA
+>>> df.head(3) # first 5 rows by default
+     Year Class_Name  Measure1
 001  2017          A       2.1
 002  2018          A       3.0
 003  2018          B       2.4
-004  2019          A       1.9
 ```
 
 --
@@ -1124,12 +1122,16 @@ np.random.seed(123)
 datafile = 'https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2017-01.csv'
 df = pd.read_csv(datafile,parse_dates=True)
 df = df.iloc[np.random.permutation(len(df))[:10000],:]
-df.to_csv('../data/yellow_tripdata_2017-01_subset10000rows.csv')
+df = df[['tpep_pickup_datetime','tpep_dropoff_datetime',
+         'trip_distance','fare_amount','tip_amount']]
+df['trip_duration'] = (df.tpep_dropoff_datetime -
+                       df.tpep_pickup_datetime).dt.seconds
+df.to_csv('../data/yellowcab_demo.csv',index=False)
 ```
 ]
 
 ---
-# Load First 1000 Rows of the Dataset
+# Load Dataset
 
 .smallest[
 ```python
@@ -1155,16 +1157,17 @@ count:false
 
 .smallest[
 ```
-tpep_pickup_datetime,tpep_dropoff_datetime,trip_distance,fare_amount,tip_amount
-2017-01-10 18:37:59,2017-01-10 18:49:24,0.71,8.0,0.0
-2017-01-05 15:14:52,2017-01-05 15:23:28,1.16,7.5,1.66
-2017-01-11 14:47:52,2017-01-11 14:59:15,1.3,8.5,1.0
-2017-01-04 07:31:49,2017-01-04 07:39:21,0.8,6.5,0.0
-2017-01-12 17:43:50,2017-01-12 17:51:25,1.4,7.0,0.0
-2017-01-22 02:08:10,2017-01-22 02:18:43,3.47,12.0,0.0
-2017-01-25 19:28:25,2017-01-25 19:35:17,0.74,6.0,0.0
-2017-01-04 20:47:30,2017-01-04 21:01:24,2.68,11.5,3.84
-2017-01-17 08:09:14,2017-01-17 08:14:12,0.7,5.0,1.15
+tpep_pickup_datetime,tpep_dropoff_datetime,trip_distance,fare_amount,tip_amount,trip_duration
+2017-01-10 18:37:59,2017-01-10 18:49:24,0.71,8.0,0.0,685
+2017-01-05 15:14:52,2017-01-05 15:23:28,1.16,7.5,1.66,516
+2017-01-11 14:47:52,2017-01-11 14:59:15,1.3,8.5,1.0,683
+2017-01-04 07:31:49,2017-01-04 07:39:21,0.8,6.5,0.0,452
+2017-01-12 17:43:50,2017-01-12 17:51:25,1.4,7.0,0.0,455
+2017-01-22 02:08:10,2017-01-22 02:18:43,3.47,12.0,0.0,633
+2017-01-25 19:28:25,2017-01-25 19:35:17,0.74,6.0,0.0,412
+2017-01-04 20:47:30,2017-01-04 21:01:24,2.68,11.5,3.84,834
+2017-01-17 08:09:14,2017-01-17 08:14:12,0.7,5.0,1.15,298
+
 ```]
 
 
@@ -1174,17 +1177,15 @@ tpep_pickup_datetime,tpep_dropoff_datetime,trip_distance,fare_amount,tip_amount
 
 .smallest[
 ```python
-# first 3 rows
->>> df.head(3)
- tpep_pickup_datetime tpep_dropoff_datetime  ...  fare_amount  tip_amount
-0  2017-01-10 18:37:59   2017-01-10 18:49:24  ...          8.0        0.00
-1  2017-01-05 15:14:52   2017-01-05 15:23:28  ...          7.5        1.66
-2  2017-01-11 14:47:52   2017-01-11 14:59:15  ...          8.5        1.00
-3  2017-01-04 07:31:49   2017-01-04 07:39:21  ...          6.5        0.00
-4  2017-01-12 17:43:50   2017-01-12 17:51:25  ...          7.0        0.00
+>>> df.head()
+  tpep_pickup_datetime tpep_dropoff_datetime  ...  tip_amount  trip_duration
+0  2017-01-10 18:37:59   2017-01-10 18:49:24  ...        0.00            685
+1  2017-01-05 15:14:52   2017-01-05 15:23:28  ...        1.66            516
+2  2017-01-11 14:47:52   2017-01-11 14:59:15  ...        1.00            683
+3  2017-01-04 07:31:49   2017-01-04 07:39:21  ...        0.00            452
+4  2017-01-12 17:43:50   2017-01-12 17:51:25  ...        0.00            455
 
-
-[5 rows x 5 columns]
+[5 rows x 6 columns]
 ```]
 
 ---
@@ -1192,7 +1193,7 @@ tpep_pickup_datetime,tpep_dropoff_datetime,trip_distance,fare_amount,tip_amount
 
 ```python
 >>> df.shape
-(1000, 5)
+(1000, 6)
 ```
 
 ```python
@@ -1204,12 +1205,12 @@ tpep_pickup_datetime,tpep_dropoff_datetime,trip_distance,fare_amount,tip_amount
 ```python
 # columns
 >>> f'{df.shape[1]} columns'
-'5 columns'
+'6 columns'
 ```
 
 ```python
 >>> 'number of rows: {}, number of columns: {}'.format(*df.shape)
-'number of rows: 1000, number of columns: 5'
+'number of rows: 1000, number of columns: 6'
 ```
 
 ---
@@ -1224,7 +1225,7 @@ count:false
 ```python
 >>> df.columns
 Index(['tpep_pickup_datetime', 'tpep_dropoff_datetime', 'trip_distance',
-       'fare_amount', 'tip_amount'],
+       'fare_amount', 'tip_amount', 'trip_duration'],
       dtype='object')
 ```]
 
@@ -1238,7 +1239,9 @@ count:false
  'tpep_dropoff_datetime',
  'trip_distance',
  'fare_amount',
- 'tip_amount']
+ 'tip_amount',
+ 'trip_duration']
+
 ```]
 
 ---
@@ -1257,6 +1260,7 @@ tpep_dropoff_datetime    datetime64[ns]
 trip_distance                   float64
 fare_amount                     float64
 tip_amount                      float64
+trip_duration                     int64
 dtype: object
 ```]
 
@@ -1278,15 +1282,15 @@ from scratch:
 count:false
 
 ```python
->>> min(sorted(df.trip_distance))
-0.0
+>>> min(df.trip_duration)
+0
 ```
 --
 count:false
 
 ```python
->>> max(sorted(df.trip_distance))
-30.11
+>>> max(df.trip_duration)
+5367
 ```
 
 --
@@ -1296,7 +1300,7 @@ Using pandas:
 
 ```python
 >>> df.trip_distance.min(), df.trip_distance.max()
-0.0, 30.11
+(0, 5367)
 ```
 
 ---
@@ -1353,15 +1357,15 @@ count:false
 
 ```python
 >>> df.describe()
-       trip_distance  fare_amount   tip_amount
-count     1000.00000  1000.000000  1000.000000
-mean         2.83236    12.256540     1.824580
-std          3.61299    10.482271     2.425029
-min          0.00000     0.000000     0.000000
-25%          1.00000     6.500000     0.000000
-50%          1.64000     9.000000     1.450000
-75%          2.90000    13.625000     2.360000
-max         30.11000   125.000000    25.360000
+       trip_distance  fare_amount   tip_amount  trip_duration
+count     1000.00000  1000.000000  1000.000000    1000.000000
+mean         2.83236    12.256540     1.824580     784.191000
+std          3.61299    10.482271     2.425029     572.928087
+min          0.00000     0.000000     0.000000       0.000000
+25%          1.00000     6.500000     0.000000     394.000000
+50%          1.64000     9.000000     1.450000     630.500000
+75%          2.90000    13.625000     2.360000    1028.500000
+max         30.11000   125.000000    25.360000    5367.000000
 ```
 
 
@@ -1419,10 +1423,10 @@ count:false
     - ~25% of data is &le; first quartile, 25th percentile
 --
 count:false
-    - `50% of data is &le; second quartile, 50th percentile (Median)
+    - ~50% of data is &le; second quartile, 50th percentile (Median)
 --
 count:false
-    - `75% of data is &le; third quartile, 75th percentile
+    - ~75% of data is &le; third quartile, 75th percentile
 
 --
 count:false
