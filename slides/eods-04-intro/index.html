@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Week 4</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Garamond);
+      @import url(https://fonts.googleapis.com/css?family=Muli:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+Elements of Data Science - S2020
+
+# Week 4
+
+02/17/2020
+
+---
+# TODOs
+<br/>
+
+--
+count: false
+
+- DSFS Ch 8,11,12
+
+- Optional PDSH
+    - Chap 5 up to Hyperparamters and Model Evaluation (next lecture)
+    - Chap 5 In Depth: Linear Regression
+
+--
+count: false
+- Answer and submit Quiz 4
+--
+count: false
+- HW1, Due ???
+
+---
+# Hypothesis Testing 
+
+- Statistical Rules of Thumb, Gerald van Belle [Chapter 2 online](http://www.vanbelle.org/chapters/webchapter2.pdf)
+
+
+- [“The 2019 ASA Guide to P-values and Statistical Significance: Don’t Say What You Don’t Mean” (Some Recommendations)(ii)](https://errorstatistics.com/2019/06/17/the-2019-asa-guide-to-p-values-and-statistical-significance-dont-say-what-you-dont-mean-some-recommendations/)
+
+
+---
+# Today
+<br/>
+
+--
+count:false
+- Finish up Data Exploration
+
+--
+count:false
+- Hypothesis Testing and MAB
+
+
+---
+class:middle
+
+# Questions?
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script>
+    // Config Remark
+    remark.macros['scale'] = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+    };
+    config_remark = {
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true,
+        ratio: "16:9"
+    };
+      var slideshow = remark.create(config_remark);
+
+    // Configure MathJax
+    MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] /* removed 'code' entry*/
+    }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
+  </body>
+</html>
