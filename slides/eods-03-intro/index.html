@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Week 3</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Garamond);
+      @import url(https://fonts.googleapis.com/css?family=Muli:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+Elements of Data Science - S2020
+
+# Week 3
+
+02/10/2020
+
+---
+# TODOs
+<br/>
+
+- Readings
+
+--
+count:false
+ - Review?: DSFS Ch 5,6
+ - Read: DSFS Ch 7, Ch 9 up to scraping the web, Ch 10 up to Dimensionality Reducition
+
+--
+count: false
+ - Seaborn tutorial: [Plotting functions](https://seaborn.pydata.org/tutorial.html)
+
+--
+count: false
+ - Optional: Practical Statistics for Data Scientists, Ch 1,2,3 ([via EBSCO](https://ezproxy.cul.columbia.edu/login?qurl=https%3a%2f%2fsearch.ebscohost.com%2flogin.aspx%3fdirect%3dtrue%26db%3dnlebk%26AN%3d1517577%26site%3dehost-live%26scope%3dsite&ebv=EB&ppid=pp_79))
+ 
+
+
+--
+count: false
+- Answer and submit Quiz 3
+--
+count: false
+- HW1?
+
+---
+# Announcements and Reminders
+
+--
+count:false
+- Marking pages in gradescope (for quiz, last page only)
+
+--
+count:false
+- Week 2 amnesty
+
+---
+# Today
+<br/>
+
+--
+count:false
+- Linear Algebra Review
+
+--
+count:false
+- Viz in Python
+
+--
+count:false
+- Pandas
+
+--
+count:false
+- Stats Review and Data Exploration
+
+
+---
+class:middle
+
+# Questions?
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script>
+    // Config Remark
+    remark.macros['scale'] = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+    };
+    config_remark = {
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true,
+        ratio: "16:9"
+    };
+      var slideshow = remark.create(config_remark);
+
+    // Configure MathJax
+    MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] /* removed 'code' entry*/
+    }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
+  </body>
+</html>
